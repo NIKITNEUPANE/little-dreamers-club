@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Sparkles, LayoutGrid, Heart, ShoppingBag, MessageCircle } from 'lucide-react';
@@ -9,8 +9,13 @@ import { useWishlist } from '../../lib/store/useWishlistStore';
 
 export const MobileFloatingDock: React.FC = () => {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
   const { itemCount, openCart } = useCart();
   const { count: wishlistCount } = useWishlist();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (pathname.startsWith('/checkout') || pathname.startsWith('/admin')) {
     return null;
@@ -59,7 +64,7 @@ export const MobileFloatingDock: React.FC = () => {
         >
           <div className="relative">
             <Heart className="w-5 h-5" />
-            {wishlistCount > 0 && (
+            {mounted && wishlistCount > 0 && (
               <span className="absolute -top-1 -right-1.5 min-w-3.5 h-3.5 px-0.5 rounded-full bg-[#E57697] text-white text-[0.55rem] font-bold flex items-center justify-center">
                 {wishlistCount}
               </span>
@@ -80,7 +85,7 @@ export const MobileFloatingDock: React.FC = () => {
         >
           <div className="relative">
             <ShoppingBag className="w-5 h-5" />
-            {itemCount > 0 && (
+            {mounted && itemCount > 0 && (
               <span className="absolute -top-1 -right-1.5 min-w-3.5 h-3.5 px-0.5 rounded-full bg-[#604E72] text-[#FAF8F5] text-[0.55rem] font-bold flex items-center justify-center">
                 {itemCount}
               </span>
