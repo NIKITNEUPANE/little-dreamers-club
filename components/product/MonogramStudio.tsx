@@ -70,9 +70,14 @@ export const MonogramStudio: React.FC<MonogramStudioProps> = ({
   const [selectedThread, setSelectedThread] = useState<ThreadColor>(THREAD_COLORS[0]);
   const [selectedPlacement, setSelectedPlacement] = useState(PLACEMENTS[0].label);
 
-  useEffect(() => {
+  const callbackRef = React.useRef(onCustomizationChange);
+  React.useEffect(() => {
+    callbackRef.current = onCustomizationChange;
+  }, [onCustomizationChange]);
+
+  React.useEffect(() => {
     if (isEnabled && monogramText.trim().length > 0) {
-      onCustomizationChange({
+      callbackRef.current({
         text: monogramText.trim(),
         font: selectedFont.id,
         fontLabel: selectedFont.name,
@@ -82,9 +87,9 @@ export const MonogramStudio: React.FC<MonogramStudioProps> = ({
         price: MONOGRAM_PRICE,
       });
     } else {
-      onCustomizationChange(null);
+      callbackRef.current(null);
     }
-  }, [isEnabled, monogramText, selectedFont, selectedThread, selectedPlacement, onCustomizationChange]);
+  }, [isEnabled, monogramText, selectedFont, selectedThread, selectedPlacement]);
 
   const handleToggle = () => {
     const nextState = !isEnabled;

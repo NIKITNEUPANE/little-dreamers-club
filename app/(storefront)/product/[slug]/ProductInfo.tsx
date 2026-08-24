@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   ShoppingBag,
@@ -51,6 +51,10 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
   const [openAccordion, setOpenAccordion] = useState<string | null>('desc');
 
   const isSaved = isInWishlist(product.id);
+
+  const handleMonogramChange = useCallback((custom: MonogramCustomization | null) => {
+    setMonogram(custom);
+  }, []);
 
   const unitPrice = selectedVariant.price + (monogram ? monogram.price : 0);
   const totalPrice = unitPrice * quantity;
@@ -130,7 +134,7 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       {/* Bespoke Live Monogramming Studio */}
       <MonogramStudio
         productName={product.name}
-        onCustomizationChange={(custom) => setMonogram(custom)}
+        onCustomizationChange={handleMonogramChange}
       />
 
       {/* Quantity & Action Buttons */}
