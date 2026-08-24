@@ -25,7 +25,18 @@ import { BrandLogo } from '../../../components/ui/BrandLogo';
 export default function CheckoutPage() {
   const router = useRouter();
   const { user } = useAuth();
-  const { items, subtotal, discount, shipping, tax, total, appliedCoupon, clearCart } = useCart();
+  const {
+    items,
+    subtotal,
+    discount,
+    shipping,
+    tax,
+    total,
+    appliedCoupon,
+    giftPackaging,
+    giftPackagingPrice,
+    clearCart,
+  } = useCart();
 
   const [formData, setFormData] = useState({
     email: user?.email || '',
@@ -98,16 +109,22 @@ export default function CheckoutPage() {
       }
 
       // 2. Prepare Order Items with immutable historical snapshot
-      const orderItems = items.map((item) => ({
-        id: `snap-${Date.now()}-${item.variant.id}`,
-        product_variant_id: item.variant.id,
-        product_name: item.product.name,
-        variant_details: `Size: ${item.variant.size} / Color: ${item.variant.color}`,
-        image_url: item.product.images[0]?.image_url || '/images/pajama-set-1.jpg',
-        quantity: item.quantity,
-        unit_price: item.variant.price,
-        total: item.variant.price * item.quantity,
-      }));
+      const orderItems = items.map((item) => {
+        const unitPrice = item.variant.price + (item.monogram?.price || 0);
+        const monogramText = item.monogram
+          ? ` | Custom Monogram: "${item.monogram.text}" (${item.monogram.fontLabel} in ${item.monogram.threadName})`
+          : '';
+        return {
+          id: `snap-${Date.now()}-${item.variant.id}`,
+          product_variant_id: item.variant.id,
+          product_name: item.product.name,
+          variant_details: `Size: ${item.variant.size} / Color: ${item.variant.color}${monogramText}`,
+          image_url: item.product.images[0]?.image_url || '/images/pajama-set-1.jpg',
+          quantity: item.quantity,
+          unit_price: unitPrice,
+          total: unitPrice * item.quantity,
+        };
+      });
 
       // 3. Create Order in Database
       const newOrder = await db.createOrder({
@@ -424,32 +441,44 @@ export default function CheckoutPage() {
 
                 {/* Items List */}
                 <div className="space-y-4 max-h-64 overflow-y-auto pr-1">
-                  {items.map((item) => (
-                    <div key={item.id} className="flex gap-3 items-center">
-                      <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-[#F5F0E8] border border-[#E8E2EE] shrink-0">
-                        <Image
-                          src={item.product.images[0]?.image_url || '/images/pajama-set-1.jpg'}
-                          alt={item.product.name}
-                          fill
-                          className="object-cover"
-                        />
-                        <span className="absolute top-0.5 right-0.5 bg-[#4A3E56] text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                          {item.quantity}
+                  {items.map((item) => {
+                    const itemUnitPrice = item.variant.price + (item.monogram?.price || 0);
+                    return (
+                      <div key={item.id} className="flex gap-3 items-center">
+                        <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-[#F5F0E8] border border-[#E8E2EE] shrink-0">
+                          <Image
+                            src={item.product.images[0]?.image_url || '/images/pajama-set-1.jpg'}
+                            alt={item.product.name}
+                            fill
+                            className="object-cover"
+                          />
+                          <span className="absolute top-0.5 right-0.5 bg-[#4A3E56] text-white text-[0.6rem] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                            {item.quantity}
+                          </span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-xs font-semibold text-[#2A2433] truncate">
+                            {item.product.name}
+                          </h4>
+                          <p className="text-[0.68rem] text-[#7E6A94]">
+                            {item.variant.size} • {item.variant.color}
+                          </p>
+                          {item.monogram && (
+                            <p className="text-[0.62rem] text-[#604E72] font-semibold flex items-center gap-1 mt-0.5">
+                              <span
+                                className="w-1.5 h-1.5 rounded-full inline-block"
+                                style={{ backgroundColor: item.monogram.threadColor }}
+                              />
+                              Monogram: {item.monogram.text}
+                            </p>
+                          )}
+                        </div>
+                        <span className="text-xs font-bold text-[#4A3E56]">
+                          {formatCurrency(itemUnitPrice * item.quantity)}
                         </span>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-xs font-semibold text-[#2A2433] truncate">
-                          {item.product.name}
-                        </h4>
-                        <p className="text-[0.68rem] text-[#7E6A94]">
-                          {item.variant.size} • {item.variant.color}
-                        </p>
-                      </div>
-                      <span className="text-xs font-bold text-[#4A3E56]">
-                        {formatCurrency(item.variant.price * item.quantity)}
-                      </span>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {/* Financial Summary */}
@@ -458,6 +487,19 @@ export default function CheckoutPage() {
                     <span>Subtotal</span>
                     <span className="font-semibold text-[#2A2433]">{formatCurrency(subtotal)}</span>
                   </div>
+
+                  {giftPackaging && (
+                    <div className="flex justify-between text-[#604E72]">
+                      <span>Heirloom Gift Packaging</span>
+                      <span>
+                        {giftPackagingPrice === 0 ? (
+                          <strong className="text-[#D4AF37]">Complimentary</strong>
+                        ) : (
+                          formatCurrency(giftPackagingPrice)
+                        )}
+                      </span>
+                    </div>
+                  )}
 
                   {discount > 0 && (
                     <div className="flex justify-between text-[#604E72] font-semibold">
@@ -469,11 +511,6 @@ export default function CheckoutPage() {
                   <div className="flex justify-between">
                     <span>Shipping</span>
                     <span>{shipping === 0 ? 'FREE' : formatCurrency(shipping)}</span>
-                  </div>
-
-                  <div className="flex justify-between">
-                    <span>Estimated Tax (7%)</span>
-                    <span>{formatCurrency(tax)}</span>
                   </div>
 
                   <div className="pt-3 border-t border-[#E8E2EE] flex justify-between items-baseline">

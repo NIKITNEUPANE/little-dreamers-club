@@ -93,11 +93,22 @@ export interface Product {
   reviews?: Review[];
 }
 
+export interface MonogramCustomization {
+  text: string;
+  font: 'script' | 'roman' | 'serif';
+  fontLabel: string;
+  threadColor: string;
+  threadName: string;
+  placement: string;
+  price: number;
+}
+
 export interface CartItem {
   id: string;
   product: Product;
   variant: ProductVariant;
   quantity: number;
+  monogram?: MonogramCustomization;
 }
 
 export type OrderStatus =

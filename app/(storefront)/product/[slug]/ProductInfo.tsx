@@ -15,8 +15,9 @@ import {
   Minus,
   Star,
 } from 'lucide-react';
-import { Product, ProductVariant } from '../../../../lib/db/types';
+import { Product, ProductVariant, MonogramCustomization } from '../../../../lib/db/types';
 import { VariantSelector } from '../../../../components/product/VariantSelector';
+import { MonogramStudio } from '../../../../components/product/MonogramStudio';
 import { useCart } from '../../../../lib/store/useCartStore';
 import { useWishlist } from '../../../../lib/store/useWishlistStore';
 import { formatCurrency } from '../../../../lib/utils';
@@ -45,19 +46,23 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
   );
 
   const [quantity, setQuantity] = useState(1);
+  const [monogram, setMonogram] = useState<MonogramCustomization | null>(null);
   const [isAdded, setIsAdded] = useState(false);
   const [openAccordion, setOpenAccordion] = useState<string | null>('desc');
 
   const isSaved = isInWishlist(product.id);
 
+  const unitPrice = selectedVariant.price + (monogram ? monogram.price : 0);
+  const totalPrice = unitPrice * quantity;
+
   const handleAddToCart = () => {
-    addItem(product, selectedVariant, quantity);
+    addItem(product, selectedVariant, quantity, monogram || undefined);
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 2000);
   };
 
   const handleBuyNow = () => {
-    addItem(product, selectedVariant, quantity);
+    addItem(product, selectedVariant, quantity, monogram || undefined);
     router.push('/checkout');
   };
 
@@ -91,16 +96,21 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       {/* Pricing */}
       <div className="flex items-baseline gap-3">
         <span className="font-editorial text-2xl sm:text-3xl font-bold text-[#4A3E56]">
-          {formatCurrency(selectedVariant.price)}
+          {formatCurrency(unitPrice)}
         </span>
         {product.compare_at_price && (
           <span className="text-base text-[#9F8EB9] line-through">
-            {formatCurrency(product.compare_at_price)}
+            {formatCurrency(product.compare_at_price + (monogram ? monogram.price : 0))}
           </span>
         )}
         {product.compare_at_price && (
           <span className="px-2.5 py-0.5 rounded-full bg-[#FAF3DE] text-[#B89324] text-xs font-bold uppercase tracking-wider">
             Save {Math.round(((product.compare_at_price - selectedVariant.price) / product.compare_at_price) * 100)}%
+          </span>
+        )}
+        {monogram && (
+          <span className="inline-flex items-center gap-1 text-[0.7rem] font-bold text-[#604E72] bg-[#EFEAF6] px-2.5 py-0.5 rounded-full">
+            <Sparkles className="w-3 h-3 text-[#D4AF37]" /> Incl. Monogram
           </span>
         )}
       </div>
@@ -115,6 +125,12 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
         variants={product.variants}
         selectedVariant={selectedVariant}
         onSelectVariant={(v) => setSelectedVariant(v)}
+      />
+
+      {/* Bespoke Live Monogramming Studio */}
+      <MonogramStudio
+        productName={product.name}
+        onCustomizationChange={(custom) => setMonogram(custom)}
       />
 
       {/* Quantity & Action Buttons */}
@@ -161,7 +177,7 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
             ) : (
               <>
                 <ShoppingBag className="w-4 h-4" />
-                <span>Add to Bag • {formatCurrency(selectedVariant.price * quantity)}</span>
+                <span>Add to Bag • {formatCurrency(totalPrice)}</span>
               </>
             )}
           </button>
@@ -194,7 +210,7 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       <div className="p-4 rounded-2xl bg-[#FFFFFF] border border-[#E8E2EE] space-y-2 text-xs text-[#7E6A94]">
         <div className="flex items-center gap-2">
           <Truck className="w-4 h-4 text-[#604E72]" />
-          <span>Complimentary express delivery on orders over $75</span>
+          <span>Complimentary express delivery on orders over Rs. 4,000</span>
         </div>
         <div className="flex items-center gap-2">
           <RotateCcw className="w-4 h-4 text-[#604E72]" />
