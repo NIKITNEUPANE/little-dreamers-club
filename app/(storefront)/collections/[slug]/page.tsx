@@ -10,6 +10,13 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateStaticParams() {
+  const collections = await db.getCollections();
+  return collections.map((col) => ({
+    slug: col.slug,
+  }));
+}
+
 export default async function CollectionPage({ params }: Props) {
   const { slug } = await params;
   const collection = await db.getCollectionBySlug(slug);

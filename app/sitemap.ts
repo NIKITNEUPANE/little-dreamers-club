@@ -1,8 +1,10 @@
 import { MetadataRoute } from 'next';
 import { db } from '../lib/db/store';
 
+export const dynamic = 'force-static';
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://littledreamersclub.com';
+  const baseUrl = 'https://little-dreamers-club.pages.dev';
   const [products, categories, collections] = await Promise.all([
     db.getProducts(),
     db.getCategories(),
