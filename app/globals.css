@@ -1,26 +1,223 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Brand Core Palette */
+    --brand-plum-900: #241B2E;
+    --brand-plum-800: #362945;
+    --brand-plum-700: #4A3E56;
+    --brand-plum-600: #604E72;
+    --brand-lavender-500: #7E6A94;
+    --brand-lavender-400: #9F8EB9;
+    --brand-lavender-300: #BEB2D4;
+    --brand-lavender-200: #DDD6E9;
+    --brand-lavender-100: #EFEAF6;
+    --brand-lavender-50: #F7F4FB;
+
+    /* Warm Gold Accents */
+    --brand-gold-700: #9B791B;
+    --brand-gold-600: #B89324;
+    --brand-gold-500: #D4AF37;
+    --brand-gold-400: #E5C365;
+    --brand-gold-300: #F2DC98;
+    --brand-gold-100: #FAF3DE;
+    --brand-gold-50: #FDF9EC;
+
+    /* Warm Creams & Blush Neutrals */
+    --brand-cream-50: #FAF8F5;
+    --brand-cream-100: #F5F0E8;
+    --brand-cream-200: #EBE3D7;
+    --brand-blush-50: #FDF6F8;
+    --brand-blush-100: #F7E6EB;
+    --brand-blush-200: #EFCBD7;
+
+    /* UI System Tokens */
+    --background: #FAF8F5;
+    --foreground: #2A2433;
+
+    --card: #FFFFFF;
+    --card-foreground: #2A2433;
+
+    --popover: #FFFFFF;
+    --popover-foreground: #2A2433;
+
+    --primary: #4A3E56;
+    --primary-foreground: #FFFFFF;
+
+    --secondary: #EFEAF6;
+    --secondary-foreground: #4A3E56;
+
+    --muted: #F3EEF8;
+    --muted-foreground: #736782;
+
+    --accent: #D4AF37;
+    --accent-foreground: #241B2E;
+
+    --destructive: #D9534F;
+    --destructive-foreground: #FFFFFF;
+
+    --border: #E8E2EE;
+    --input: #E8E2EE;
+    --ring: #9F8EB9;
+
+    --radius: 1rem;
   }
 }
 
+@theme {
+  --color-plum-900: var(--brand-plum-900);
+  --color-plum-800: var(--brand-plum-800);
+  --color-plum-700: var(--brand-plum-700);
+  --color-plum-600: var(--brand-plum-600);
+  --color-lavender-500: var(--brand-lavender-500);
+  --color-lavender-400: var(--brand-lavender-400);
+  --color-lavender-300: var(--brand-lavender-300);
+  --color-lavender-200: var(--brand-lavender-200);
+  --color-lavender-100: var(--brand-lavender-100);
+  --color-lavender-50: var(--brand-lavender-50);
+
+  --color-gold-700: var(--brand-gold-700);
+  --color-gold-600: var(--brand-gold-600);
+  --color-gold-500: var(--brand-gold-500);
+  --color-gold-400: var(--brand-gold-400);
+  --color-gold-100: var(--brand-gold-100);
+  --color-gold-50: var(--brand-gold-50);
+
+  --color-cream-50: var(--brand-cream-50);
+  --color-cream-100: var(--brand-cream-100);
+  --color-cream-200: var(--brand-cream-200);
+  --color-blush-50: var(--brand-blush-50);
+  --color-blush-100: var(--brand-blush-100);
+
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+}
+
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Typography Utility */
+.font-editorial {
+  font-family: var(--font-serif);
+}
+
+/* Pure Neutral Luxury Glass & Blur (No colored ambient gradient) */
+.apple-glass-card {
+  background: rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 12px 32px -8px rgba(74, 62, 86, 0.07), 
+              0 1px 2px rgba(0, 0, 0, 0.02),
+              inset 0 1px 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+.apple-glass-card:hover {
+  background: rgba(255, 255, 255, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 20px 40px -10px rgba(74, 62, 86, 0.12),
+              0 2px 4px rgba(0, 0, 0, 0.03),
+              inset 0 1px 1px 0 rgba(255, 255, 255, 1) !important;
+}
+
+.apple-glass-pill {
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 4px 12px 0 rgba(74, 62, 86, 0.05),
+              inset 0 1px 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(232, 226, 238, 0.6);
+}
+
+.glass-nav {
+  background: rgba(250, 248, 245, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(232, 226, 238, 0.7);
+}
+
+/* Soft delicate shadow */
+.shadow-dream {
+  box-shadow: 0 10px 30px -10px rgba(74, 62, 86, 0.08), 0 4px 12px -4px rgba(74, 62, 86, 0.04);
+}
+
+.shadow-dream-lg {
+  box-shadow: 0 20px 40px -15px rgba(74, 62, 86, 0.12), 0 8px 16px -6px rgba(74, 62, 86, 0.06);
+}
+
+.shadow-gold {
+  box-shadow: 0 8px 25px -6px rgba(212, 175, 55, 0.25);
+}
+
+/* Animations */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.shimmer-loading {
+  background: linear-gradient(90deg, #F3EEF8 25%, #FAF7FC 50%, #F3EEF8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #D8CEE3;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9F8EB9;
 }
