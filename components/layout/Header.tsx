@@ -17,9 +17,14 @@ export const Header: React.FC = () => {
   const pathname = usePathname();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { itemCount, openCart } = useCart();
   const { count: wishlistCount } = useWishlist();
   const { user, isAdmin } = useAuth();
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navLinks = [
     { label: 'New Arrivals', href: '/shop?sort=newest' },
@@ -130,7 +135,7 @@ export const Header: React.FC = () => {
               title="Saved treasures"
             >
               <Heart className="w-5 h-5" />
-              {wishlistCount > 0 && (
+              {mounted && wishlistCount > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 min-w-4 h-4 px-1 rounded-full bg-[#604E72] text-[#FAF8F5] text-[0.62rem] font-bold flex items-center justify-center">
                   {wishlistCount}
                 </span>
@@ -144,7 +149,7 @@ export const Header: React.FC = () => {
               aria-label="Cart drawer"
             >
               <ShoppingBag className="w-5 h-5" />
-              {itemCount > 0 && (
+              {mounted && itemCount > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 min-w-4 h-4 px-1 rounded-full bg-[#D4AF37] text-[#241B2E] text-[0.62rem] font-bold flex items-center justify-center animate-scale-in">
                   {itemCount}
                 </span>

@@ -14,7 +14,6 @@ export default function StorefrontLayout({
       <Header />
       <main className="flex-1 pb-16 lg:pb-0">{children}</main>
       <Footer />
-      <CartDrawer />
       <MobileFloatingDock />
     </div>
   );
