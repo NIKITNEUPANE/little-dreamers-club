@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Heart, ShoppingBag, Check, Star, Eye } from 'lucide-react';
@@ -15,12 +15,17 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = false }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isAdded, setIsAdded] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { addItem } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
-  const [isAdded, setIsAdded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
-  const isSaved = isInWishlist(product.id);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isSaved = mounted && isInWishlist(product.id);
   const primaryImage = product.images[0]?.image_url || '/images/pajama-set-1.jpg';
   const secondaryImage = product.images[1]?.image_url || primaryImage;
 

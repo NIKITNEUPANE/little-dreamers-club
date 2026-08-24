@@ -49,8 +49,13 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
   const [monogram, setMonogram] = useState<MonogramCustomization | null>(null);
   const [isAdded, setIsAdded] = useState(false);
   const [openAccordion, setOpenAccordion] = useState<string | null>('desc');
+  const [mounted, setMounted] = useState(false);
 
-  const isSaved = isInWishlist(product.id);
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isSaved = mounted && isInWishlist(product.id);
 
   const handleMonogramChange = useCallback((custom: MonogramCustomization | null) => {
     setMonogram(custom);
