@@ -1,87 +1,158 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Sparkles, Star } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 interface HeroSectionProps {
   content?: {
-    badge: string;
-    headline: string;
-    subheadline: string;
-    primary_cta_text: string;
-    primary_cta_link: string;
-    secondary_cta_text: string;
-    secondary_cta_link: string;
-    image_url: string;
+    badge?: string;
+    headline?: string;
+    subheadline?: string;
+    primary_cta_text?: string;
+    primary_cta_link?: string;
+    image_url?: string;
   };
 }
 
+const CATEGORY_QUICK_LINKS = [
+  {
+    name: 'Clothing',
+    itemCount: '120+ items',
+    image: '/images/cat-clothing.jpg',
+    href: '/shop?category=clothing',
+    bgColor: 'bg-[#F4F1EA]',
+  },
+  {
+    name: 'Toys',
+    itemCount: '85+ items',
+    image: '/images/cat-toys.jpg',
+    href: '/shop?category=toys',
+    bgColor: 'bg-[#F7F2EB]',
+  },
+  {
+    name: 'Nursery',
+    itemCount: '60+ items',
+    image: '/images/cat-nursery.jpg',
+    href: '/shop?category=nursery',
+    bgColor: 'bg-[#EFF3F0]',
+  },
+  {
+    name: 'Accessories',
+    itemCount: '45+ items',
+    image: '/images/cat-accessories.jpg',
+    href: '/shop?category=gifts',
+    bgColor: 'bg-[#F9EFF2]',
+  },
+];
+
 export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
-  const data = content || {
-    badge: 'AUTUMN / WINTER 2026',
-    headline: 'Little Things.\nBig Dreams.',
-    subheadline: '',
-    primary_cta_text: 'Shop Collection',
-    primary_cta_link: '/shop',
-    secondary_cta_text: '',
-    secondary_cta_link: '',
-    image_url: '/images/hero-lifestyle.jpg',
+  const data = {
+    badge: content?.badge || 'New Collection',
+    headline: content?.headline || 'Where Little\nThings Become\nBig Dreams',
+    subheadline:
+      content?.subheadline ||
+      'Thoughtfully made clothes and toys for every little adventure.',
+    primary_cta_text: content?.primary_cta_text || 'Shop New Arrivals',
+    primary_cta_link: content?.primary_cta_link || '/shop?sort=newest',
+    image_url: content?.image_url || '/images/hero-lifestyle.jpg',
   };
 
   return (
-    <section className="relative pt-2 sm:pt-4 pb-4 sm:pb-8 bg-[#FAF8F5]">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        {/* Main Integrated Luxury Visual Banner */}
-        <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#241B2E] shadow-dream min-h-[360px] sm:min-h-[440px] lg:min-h-[500px] flex items-end">
-          {/* Background Lifestyle Image */}
-          <Image
-            src={data.image_url}
-            alt="Little Dreamers Club Newborn & Toddler Luxury Heirloom"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center sm:object-[center_30%]"
-          />
-
-          {/* Top-Left Pure PNG Brand Logo (No Background & No Text) */}
-          <div className="absolute top-3.5 left-3.5 sm:top-5 sm:left-5 z-20">
+    <section className="pt-2 sm:pt-4 pb-8 sm:pb-12 bg-[#FAF8F5]">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+        {/* Main Editorial Hero Card */}
+        <div className="relative w-full rounded-[2rem] sm:rounded-[2.8rem] overflow-hidden bg-[#FAF6F0] shadow-dream min-h-[420px] sm:min-h-[480px] lg:min-h-[540px] flex items-center">
+          {/* Background Image: Baby on Right Half */}
+          <div className="absolute inset-0">
             <Image
-              src="/images/brand-logo-transparent.png"
-              alt="Little Dreamers Club"
-              width={64}
-              height={64}
-              className="w-12 h-12 sm:w-16 sm:h-16 object-contain drop-shadow-md"
+              src={data.image_url}
+              alt="Where Little Things Become Big Dreams"
+              fill
               priority
+              sizes="100vw"
+              className="object-cover object-[center_20%] sm:object-[center_25%]"
             />
+            {/* Soft Warm Scrim on Left for Text Readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5]/95 via-[#FAF8F5]/70 to-transparent sm:w-[60%]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F5]/90 via-[#FAF8F5]/30 to-transparent sm:hidden" />
           </div>
 
-          {/* Gentle Editorial Gradient (Subtle & Luminous) */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1422]/80 via-[#1A1422]/15 to-transparent" />
-
-          {/* Editorial Content Row: Headline on Left, Shop Collection on Right (Desktop Only) */}
-          <div className="relative z-10 w-full p-4 sm:p-7 lg:p-10 flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4">
-            {/* Left Column: Kicker + Multi-Line Headline */}
-            <div className="space-y-1 sm:space-y-1.5 text-white">
-              <span className="text-[0.6rem] sm:text-xs font-bold tracking-[0.22em] text-[#FDE8B3] uppercase block">
-                ✦ {data.badge}
+          {/* Left Content Column */}
+          <div className="relative z-10 w-full p-6 sm:p-10 lg:p-14 max-w-sm sm:max-w-md lg:max-w-lg space-y-3 sm:space-y-4">
+            {/* Pill Badge */}
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF3F0]/90 backdrop-blur-xs border border-[#FADCD5] shadow-2xs">
+              <Sparkles className="w-3 h-3 text-[#D06B60]" />
+              <span className="text-[0.68rem] sm:text-xs font-semibold text-[#D06B60]">
+                {data.badge}
               </span>
-              <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium text-white tracking-tight leading-[1.12]">
-                <span className="block">Little Things.</span>
-                <span className="block italic text-[#FAF3DE]">Big Dreams.</span>
-              </h1>
             </div>
 
-            {/* Right Column: CTA Button (Hidden on Mobile) */}
-            <div className="shrink-0 hidden sm:block">
+            {/* Main Headline */}
+            <h1 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-medium text-[#2E243A] tracking-tight leading-[1.12]">
+              {data.headline.split('\n').map((line, idx) => (
+                <span key={idx} className="block">
+                  {line}
+                </span>
+              ))}
+            </h1>
+
+            {/* Subheadline */}
+            <p className="text-xs sm:text-sm text-[#6C5E78] leading-relaxed font-normal max-w-[240px] sm:max-w-xs">
+              {data.subheadline}
+            </p>
+
+            {/* CTA Button */}
+            <div className="pt-1.5 sm:pt-2">
               <Link
                 href={data.primary_cta_link}
-                className="inline-flex items-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full bg-white hover:bg-[#FAF3DE] text-[#2A2433] text-xs font-bold uppercase tracking-wider shadow-dream transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full bg-[#392E46] hover:bg-[#281F33] text-white text-xs font-semibold shadow-sm transition-all hover:scale-[1.02]"
               >
                 <span>{data.primary_cta_text}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
+
+            {/* Carousel Dots Indicator */}
+            <div className="pt-2 sm:pt-4 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#392E46]" />
+              <span className="w-2 h-2 rounded-full bg-[#DDD6E5]" />
+              <span className="w-2 h-2 rounded-full bg-[#DDD6E5]" />
+            </div>
           </div>
+        </div>
+
+        {/* 4-Item Circular Categories Navigation */}
+        <div className="grid grid-cols-4 gap-2.5 sm:gap-6 pt-1">
+          {CATEGORY_QUICK_LINKS.map((cat) => (
+            <Link
+              key={cat.name}
+              href={cat.href}
+              className="group flex flex-col items-center text-center space-y-1.5 sm:space-y-2.5"
+            >
+              {/* Circular Avatar Container */}
+              <div
+                className={`relative w-full max-w-[76px] sm:max-w-[130px] aspect-square rounded-full overflow-hidden ${cat.bgColor} border border-[#ECE6DC] shadow-2xs group-hover:shadow-md group-hover:scale-105 transition-all duration-300`}
+              >
+                <Image
+                  src={cat.image}
+                  alt={cat.name}
+                  fill
+                  sizes="(max-width: 640px) 25vw, 15vw"
+                  className="object-cover group-hover:scale-108 transition-transform duration-500"
+                />
+              </div>
+
+              {/* Text Labels */}
+              <div>
+                <h3 className="font-editorial text-xs sm:text-base font-semibold text-[#2E243A] group-hover:text-[#604E72] transition-colors leading-tight">
+                  {cat.name}
+                </h3>
+                <span className="text-[0.62rem] sm:text-xs text-[#8A799E] mt-0.5 block">
+                  {cat.itemCount}
+                </span>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
