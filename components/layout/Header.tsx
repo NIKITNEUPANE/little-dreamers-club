@@ -14,13 +14,12 @@ import { useAuth } from '../../lib/store/useAuthStore';
 import { useMobileMenu } from '../../lib/store/useMobileMenuStore';
 
 const SEARCH_EXAMPLES = [
-  "Search 'organic modal pajamas'...",
-  "Search 'cashmere moon blanket'...",
-  "Search 'lavender star romper'...",
-  "Search 'wooden dream castle'...",
-  "Search 'heirloom plush bunny'...",
-  "Search 'curated baby gift set'...",
-  "Search 'nursery essentials'...",
+  "Search 'organic pajamas'...",
+  "Search 'cashmere blanket'...",
+  "Search 'lavender romper'...",
+  "Search 'dream castle'...",
+  "Search 'plush bunny'...",
+  "Search 'curated gift set'...",
 ];
 
 export const Header: React.FC = () => {
@@ -114,21 +113,21 @@ export const Header: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
-              className="w-full h-8 sm:h-9.5 px-2.5 sm:px-3.5 rounded-full bg-white/90 hover:bg-white border border-[#E8E2EE] hover:border-[#BEB2D4] shadow-2xs hover:shadow-xs flex items-center justify-between transition-all group text-left cursor-pointer"
+              className="w-full h-8.5 sm:h-9.5 px-2.5 sm:px-3.5 rounded-full bg-white/90 hover:bg-white border border-[#E8E2EE] hover:border-[#BEB2D4] shadow-2xs hover:shadow-xs flex items-center justify-between transition-all group text-left cursor-pointer"
               aria-label="Search catalog"
             >
-              <div className="flex items-center gap-1.5 sm:gap-2 overflow-hidden flex-1">
-                <Search className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#7E6A94] group-hover:text-[#604E72] shrink-0" />
+              <div className="flex items-center gap-2 overflow-hidden flex-1">
+                <Search className="w-3.5 h-3.5 text-[#7E6A94] group-hover:text-[#604E72] shrink-0" />
                 
-                {/* Cross-fading placeholder carousel */}
-                <div className="relative h-4 sm:h-5 overflow-hidden flex-1">
+                {/* Cross-fading placeholder carousel with exact vertical centering */}
+                <div className="relative h-5 flex items-center overflow-hidden flex-1">
                   {SEARCH_EXAMPLES.map((example, idx) => (
                     <span
                       key={example}
-                      className={`absolute inset-0 text-[0.7rem] sm:text-xs text-[#7E6A94] font-normal transition-all duration-700 ease-in-out flex items-center line-clamp-1 select-none ${
+                      className={`absolute inset-0 flex items-center text-[0.72rem] sm:text-xs text-[#7E6A94] font-normal transition-all duration-500 ease-out truncate select-none ${
                         idx === placeholderIndex
                           ? 'opacity-100 transform translate-y-0'
-                          : 'opacity-0 transform -translate-y-2.5 pointer-events-none'
+                          : 'opacity-0 transform -translate-y-2 pointer-events-none'
                       }`}
                     >
                       {example}

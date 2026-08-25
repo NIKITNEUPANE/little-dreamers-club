@@ -73,14 +73,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               sizes="100vw"
               className="object-cover object-[94%_center] sm:object-[center_center]"
             />
-            {/* Soft, delicate white gradient wash strictly behind text area without touching baby */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/75 via-white/25 to-transparent w-[44%] sm:w-[38%] pointer-events-none" />
+            {/* Clean soft white gradient wash behind text area fading before baby */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5] via-[#FAF8F5]/85 to-transparent w-[52%] sm:w-[42%] pointer-events-none" />
           </div>
 
-          {/* Left Content Column (Strictly constrained so text never touches baby) */}
-          <div className="relative z-10 w-full p-5 sm:p-10 lg:p-14 max-w-[210px] sm:max-w-md lg:max-w-lg space-y-2 sm:space-y-3.5">
-            {/* Main Headline with subtle drop shadow for crisp clarity */}
-            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium text-[#261D32] tracking-tight leading-[1.14] drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)]">
+          {/* Left Content Column (Exact spacing matching reference image) */}
+          <div className="relative z-10 w-full p-5 sm:p-10 lg:p-14 max-w-[215px] sm:max-w-md lg:max-w-lg flex flex-col justify-center">
+            {/* Top Pill Badge */}
+            <div className="mb-2.5 sm:mb-3.5">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF3F0] border border-[#FADCD5] shadow-2xs">
+                <Sparkles className="w-3 h-3 text-[#D06B60]" />
+                <span className="text-[0.68rem] sm:text-xs font-semibold text-[#D06B60]">
+                  New Collection
+                </span>
+              </div>
+            </div>
+
+            {/* Main Headline */}
+            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium text-[#261D32] tracking-tight leading-[1.12] mb-2.5 sm:mb-3.5">
               {data.headline.split('\n').map((line, idx) => (
                 <span key={idx} className="block">
                   {line}
@@ -88,19 +98,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               ))}
             </h1>
 
-            {/* Subheadline with subtle drop shadow matching reference */}
-            <p className="text-[0.72rem] sm:text-sm text-[#5B4C68] leading-relaxed font-medium max-w-[185px] sm:max-w-xs drop-shadow-[0_1px_1.5px_rgba(255,255,255,0.9)]">
+            {/* Subheadline matching reference wording and line wrap */}
+            <p className="text-[0.72rem] sm:text-sm text-[#5B4C68] leading-relaxed font-normal max-w-[185px] sm:max-w-xs mb-3.5 sm:mb-4">
               {data.subheadline}
             </p>
 
-            {/* Frosted Glass New Collection Action Button with Shadow */}
-            <div className="pt-1.5 sm:pt-3">
+            {/* CTA Button */}
+            <div>
               <Link
                 href={data.primary_cta_link}
-                className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-full bg-[#FFF3F0]/95 hover:bg-[#FFEBE5] backdrop-blur-md border border-[#FADCD5] hover:border-[#F6C7BC] text-[#D06B60] text-[0.72rem] sm:text-sm font-semibold shadow-[0_3px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] transition-all hover:scale-[1.03] group"
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-full bg-[#FFF3F0]/95 hover:bg-[#FFEBE5] backdrop-blur-md border border-[#FADCD5] hover:border-[#F6C7BC] text-[#D06B60] text-[0.72rem] sm:text-sm font-semibold shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_14px_rgba(0,0,0,0.08)] transition-all hover:scale-[1.03] group"
               >
-                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#D06B60] group-hover:rotate-12 transition-transform" />
-                <span>New Collection</span>
+                <span>Shop New Arrivals</span>
                 <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#D06B60] group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
