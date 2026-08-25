@@ -80,7 +80,7 @@ export const Footer: React.FC = () => {
               Heirloom sleepwear, buttery blankets, and imaginative play treasures made for little dreams.
             </p>
 
-            <form onSubmit={handleSubscribe} className="pt-1 max-w-sm">
+            <form onSubmit={handleSubscribe} suppressHydrationWarning className="pt-1 max-w-sm">
               <div className="relative flex items-center">
                 <input
                   type="email"
@@ -88,6 +88,7 @@ export const Footer: React.FC = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter email for little surprises..."
                   required
+                  suppressHydrationWarning
                   className="w-full bg-[#FFFFFF] border border-[#E8E2EE] rounded-full py-2 pl-3.5 pr-24 text-xs text-[#2A2433] placeholder-[#9F8EB9] focus:outline-none focus:border-[#7E6A94]"
                 />
                 <button

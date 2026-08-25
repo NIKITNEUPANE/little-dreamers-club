@@ -68,6 +68,7 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose })
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search by product, collection, materials..."
+                suppressHydrationWarning
                 className="w-full bg-transparent text-lg sm:text-xl font-normal text-[#2A2433] placeholder-[#9F8EB9] focus:outline-none"
               />
             </div>
