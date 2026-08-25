@@ -57,8 +57,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${playfair.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#FAF8F5] text-[#2A2433] selection:bg-[#EFEAF6] selection:text-[#4A3E56]">
+    <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${playfair.variable} h-full antialiased`}>
+      <body suppressHydrationWarning className="min-h-full flex flex-col bg-[#FAF8F5] text-[#2A2433] selection:bg-[#EFEAF6] selection:text-[#4A3E56]">
         {children}
       </body>
     </html>

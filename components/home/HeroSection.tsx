@@ -69,6 +69,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               alt="Where Little Things Become Big Dreams"
               fill
               priority
+              loading="eager"
               sizes="100vw"
               className="object-cover object-[94%_center] sm:object-[center_center]"
             />
