@@ -79,16 +79,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
 
           {/* Left Content Column (Exact spacing matching reference image) */}
           <div className="relative z-10 w-full p-5 sm:p-10 lg:p-14 max-w-[215px] sm:max-w-md lg:max-w-lg flex flex-col justify-center">
-            {/* Top Pill Badge */}
-            <div className="mb-2.5 sm:mb-3.5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF3F0] border border-[#FADCD5] shadow-2xs">
-                <Sparkles className="w-3 h-3 text-[#D06B60]" />
-                <span className="text-[0.68rem] sm:text-xs font-semibold text-[#D06B60]">
-                  New Collection
-                </span>
-              </div>
-            </div>
-
             {/* Main Headline */}
             <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium text-[#261D32] tracking-tight leading-[1.12] mb-2.5 sm:mb-3.5">
               {data.headline.split('\n').map((line, idx) => (
@@ -103,14 +93,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               {data.subheadline}
             </p>
 
-            {/* CTA Button */}
+            {/* Clickable New Collection Button at Bottom of Text with Logo on Left */}
             <div>
               <Link
                 href={data.primary_cta_link}
-                className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-full bg-[#FFF3F0]/95 hover:bg-[#FFEBE5] backdrop-blur-md border border-[#FADCD5] hover:border-[#F6C7BC] text-[#D06B60] text-[0.72rem] sm:text-sm font-semibold shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_14px_rgba(0,0,0,0.08)] transition-all hover:scale-[1.03] group"
+                className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#FFF3F0] hover:bg-[#FFE8E2] border border-[#FADCD5] shadow-2xs hover:shadow-xs transition-all hover:scale-[1.03] group cursor-pointer"
+                aria-label="Shop New Collection"
               >
-                <span>Shop New Arrivals</span>
-                <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#D06B60] group-hover:translate-x-0.5 transition-transform" />
+                <Sparkles className="w-3 h-3 text-[#D06B60] group-hover:rotate-12 transition-transform shrink-0" />
+                <span className="text-[0.68rem] sm:text-xs font-semibold text-[#D06B60]">
+                  New Collection
+                </span>
               </Link>
             </div>
           </div>
