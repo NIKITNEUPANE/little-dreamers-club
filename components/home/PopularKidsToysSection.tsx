@@ -132,96 +132,39 @@ const TOYS_DATA: ToyItem[] = [
 
 const ToyCard: React.FC<{ toy: ToyItem }> = ({ toy }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isAdded, setIsAdded] = useState(false);
-  const { addItem } = useCart();
-  const { toggleWishlist, isInWishlist } = useWishlist();
-
-  const isWishlisted = isInWishlist(toy.id);
-
-  const handleQuickAdd = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const dummyProduct: Product = {
-      id: toy.id,
-      name: toy.name,
-      slug: toy.slug,
-      sku: `TOY-${toy.id.toUpperCase()}`,
-      category_id: 'cat-toys',
-      category_name: 'Toys & Imagination',
-      base_price: toy.price,
-      compare_at_price: toy.compareAtPrice,
-      short_description: toy.name,
-      description: toy.name,
-      status: 'active',
-      featured: true,
-      rating: toy.rating,
-      review_count: toy.reviewsCount,
-      created_at: '2026-08-01T00:00:00Z',
-      updated_at: '2026-08-20T00:00:00Z',
-      images: [
-        {
-          id: `img-${toy.id}`,
-          product_id: toy.id,
-          image_url: toy.imageUrl,
-          alt_text: toy.name,
-          sort_order: 1,
-          is_primary: true,
-        },
-      ],
-      variants: [
-        {
-          id: `var-${toy.id}`,
-          product_id: toy.id,
-          sku: `TOY-${toy.id.toUpperCase()}-STD`,
-          size: 'One Size',
-          color: 'Natural Cream',
-          color_hex: '#F5F0E8',
-          price: toy.price,
-          stock_quantity: 12,
-          low_stock_threshold: 3,
-        },
-      ],
-    };
-
-    addItem(dummyProduct, dummyProduct.variants[0], 1);
-    setIsAdded(true);
-    setTimeout(() => setIsAdded(false), 2000);
-  };
 
   return (
-    <div
-      className="group relative flex flex-col bg-white rounded-2xl sm:rounded-3xl border border-[#EAE4F0] overflow-hidden shadow-2xs hover:shadow-dream transition-all duration-500 hover:-translate-y-1 justify-between"
+    <Link
+      href={`/product/${toy.slug}`}
+      className="group relative flex flex-col bg-white rounded-2xl sm:rounded-3xl border border-[#EAE4F0] overflow-hidden shadow-2xs hover:shadow-dream transition-all duration-500 hover:-translate-y-1 justify-between block"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Top Image Container */}
       <div className="relative aspect-square w-full overflow-hidden bg-[#FAF8F5]">
-        <Link href={`/product/${toy.slug}`} className="block relative w-full h-full">
-          {/* Primary Image */}
+        {/* Primary Image */}
+        <Image
+          src={toy.imageUrl}
+          alt={toy.name}
+          fill
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          className={`object-cover transition-all duration-700 ease-out group-hover:scale-105 ${
+            isHovered && toy.secondaryImageUrl ? 'opacity-0' : 'opacity-100'
+          }`}
+        />
+
+        {/* Secondary Image for Slow Gentle Hover Cross-Fade */}
+        {toy.secondaryImageUrl && (
           <Image
-            src={toy.imageUrl}
-            alt={toy.name}
+            src={toy.secondaryImageUrl}
+            alt={`${toy.name} alternate view`}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className={`object-cover transition-all duration-700 ease-out group-hover:scale-105 ${
-              isHovered && toy.secondaryImageUrl ? 'opacity-0' : 'opacity-100'
+            className={`object-cover transition-all duration-700 ease-out group-hover:scale-105 absolute inset-0 ${
+              isHovered ? 'opacity-100' : 'opacity-0'
             }`}
           />
-
-          {/* Secondary Image for Slow Gentle Hover Cross-Fade */}
-          {toy.secondaryImageUrl && (
-            <Image
-              src={toy.secondaryImageUrl}
-              alt={`${toy.name} alternate view`}
-              fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className={`object-cover transition-all duration-700 ease-out group-hover:scale-105 absolute inset-0 ${
-                isHovered ? 'opacity-100' : 'opacity-0'
-              }`}
-            />
-          )}
-        </Link>
+        )}
 
         {/* Corner Badge */}
         {toy.badge && (
@@ -229,57 +172,6 @@ const ToyCard: React.FC<{ toy: ToyItem }> = ({ toy }) => {
             {toy.badge}
           </div>
         )}
-
-        {/* Top Floating Glass Action Icons */}
-        <div className="absolute top-3 right-3 z-20 flex flex-col gap-1.5 opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              toggleWishlist(toy.id);
-            }}
-            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all shadow-xs ${
-              isWishlisted
-                ? 'bg-[#E57697] text-white'
-                : 'bg-white/90 backdrop-blur-md border border-white/80 text-[#7E6A94] hover:text-[#E57697] hover:bg-white'
-            }`}
-            aria-label="Save to Wishlist"
-          >
-            <Heart className={`w-3.5 h-3.5 ${isWishlisted ? 'fill-current' : ''}`} />
-          </button>
-
-          <Link
-            href={`/product/${toy.slug}`}
-            className="w-8 h-8 rounded-full bg-white/90 backdrop-blur-md border border-white/80 text-[#7E6A94] hover:text-[#4A3E56] hover:bg-white flex items-center justify-center transition-all shadow-xs"
-            aria-label="Quick View"
-          >
-            <Eye className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-
-        {/* Desktop Quick Add Pill on Hover */}
-        <div className="absolute inset-x-3 bottom-3 z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 hidden sm:block">
-          <button
-            onClick={handleQuickAdd}
-            className={`w-full py-2.5 px-3 rounded-full text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-dream transition-all ${
-              isAdded
-                ? 'bg-[#604E72] text-white'
-                : 'bg-[#4A3E56]/95 hover:bg-[#362945] text-white backdrop-blur-xs hover:scale-[1.02]'
-            }`}
-          >
-            {isAdded ? (
-              <>
-                <Check className="w-3.5 h-3.5 text-[#D4AF37]" />
-                <span>Added to Bag!</span>
-              </>
-            ) : (
-              <>
-                <ShoppingBag className="w-3.5 h-3.5" />
-                <span>Quick Add</span>
-              </>
-            )}
-          </button>
-        </div>
       </div>
 
       {/* Card Content Body */}
@@ -289,14 +181,12 @@ const ToyCard: React.FC<{ toy: ToyItem }> = ({ toy }) => {
             {toy.ageRange}
           </span>
 
-          <Link href={`/product/${toy.slug}`} className="group-hover:text-[#604E72] transition-colors block">
-            <h3 className="font-editorial text-xs sm:text-sm font-semibold text-[#2A2433] line-clamp-1 leading-snug">
-              {toy.name}
-            </h3>
-          </Link>
+          <h3 className="font-editorial text-xs sm:text-sm font-semibold text-[#2A2433] group-hover:text-[#604E72] transition-colors line-clamp-1 leading-snug">
+            {toy.name}
+          </h3>
         </div>
 
-        {/* Price Row (Rating removed completely) */}
+        {/* Price Row */}
         <div className="pt-0.5 flex items-baseline gap-2">
           <span className="font-bold text-xs sm:text-sm text-[#4A3E56]">
             {formatCurrency(toy.price)}
@@ -308,22 +198,7 @@ const ToyCard: React.FC<{ toy: ToyItem }> = ({ toy }) => {
           )}
         </div>
       </div>
-
-      {/* Mobile Add to Bag Button */}
-      <div className="px-3.5 pb-3.5 sm:hidden">
-        <button
-          onClick={handleQuickAdd}
-          className={`w-full py-1.5 rounded-full text-[0.7rem] font-semibold flex items-center justify-center gap-1 transition-colors ${
-            isAdded
-              ? 'bg-emerald-600 text-white'
-              : 'bg-[#FAF4FC] text-[#604E72] border border-[#E8E2EE] active:bg-[#F3EEF8]'
-          }`}
-        >
-          <ShoppingBag className="w-3 h-3" />
-          <span>{isAdded ? 'Added' : 'Add to Bag'}</span>
-        </button>
-      </div>
-    </div>
+    </Link>
   );
 };
 
