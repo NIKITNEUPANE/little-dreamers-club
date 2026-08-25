@@ -85,8 +85,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               <span className="block italic text-[#785B88]">Big Dreams</span>
             </h1>
 
-            {/* Subheadline seamlessly connected with refined hierarchy */}
-            <p className="text-[0.76rem] sm:text-base text-[#5B4C68] leading-[1.4] font-normal max-w-[195px] sm:max-w-xs mb-3.5 sm:mb-5">
+            {/* Subheadline with reduced opacity and muted color intensity */}
+            <p className="text-[0.76rem] sm:text-base text-[#7A6B88]/80 leading-[1.4] font-normal max-w-[195px] sm:max-w-xs mb-3.5 sm:mb-5">
               Clothes and toys for every<br />little adventure.
             </p>
 
