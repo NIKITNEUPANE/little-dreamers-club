@@ -603,7 +603,7 @@ export const INITIAL_STORE_CONTENT: StoreContent = {
   hero_section: {
     badge: 'New Collection',
     headline: 'Where Little\nThings Become\nBig Dreams',
-    subheadline: 'Thoughtfully made clothes and toys for every little adventure.',
+    subheadline: 'Clothes and toys for every little adventure.',
     primary_cta_text: 'New Collection',
     primary_cta_link: '/shop?sort=newest',
     secondary_cta_text: 'Explore Collection',
