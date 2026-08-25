@@ -19,57 +19,64 @@ interface HeroSectionProps {
 export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
   const data = content || {
     badge: 'NEW AUTUMN / WINTER DREAMWEAR',
-    headline: 'Little Things.\nBig Dreams.',
+    headline: 'Little Things. Big Dreams.',
     subheadline:
-      'Beautiful heirloom pieces made for little moments, big imaginations, and every peaceful dream in between.',
+      'Buttery-soft organic heirloom pieces made for restful rituals and gentle moments.',
     primary_cta_text: 'Shop Collection',
     primary_cta_link: '/shop',
-    secondary_cta_text: 'Explore New Arrivals',
+    secondary_cta_text: 'New Arrivals',
     secondary_cta_link: '/shop?sort=newest',
     image_url: '/images/hero-lifestyle.jpg',
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#FAF4FC]/80 via-[#FAF8F5] to-[#FAF8F5] pt-4 pb-8 sm:py-12 lg:pt-14 lg:pb-20">
-      {/* Delicate floating background stars / shapes */}
-      <div className="absolute top-12 left-10 text-[#D4AF37]/30 animate-float pointer-events-none hidden md:block">
-        <Sparkles className="w-8 h-8" />
-      </div>
-      <div className="absolute bottom-20 right-16 text-[#9F8EB9]/25 animate-float pointer-events-none hidden lg:block" style={{ animationDelay: '1.5s' }}>
-        <Star className="w-6 h-6 fill-current" />
-      </div>
+    <section className="relative pt-2 sm:pt-4 pb-6 sm:pb-10 bg-[#FAF8F5]">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        {/* Main Integrated Luxury Visual Banner */}
+        <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#241B2E] shadow-dream-lg min-h-[380px] sm:min-h-[460px] lg:min-h-[520px] flex items-end">
+          {/* Background Lifestyle Image */}
+          <Image
+            src={data.image_url}
+            alt="Little Dreamers Club Newborn & Toddler Luxury Heirloom"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center sm:object-[center_35%]"
+          />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
-          {/* Left Text Column */}
-          <div className="lg:col-span-6 space-y-3.5 sm:space-y-6 text-center lg:text-left">
+          {/* Soft Editorial Gradient Scrim */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1F1728]/90 via-[#1F1728]/35 to-transparent sm:from-[#1F1728]/85 sm:via-[#1F1728]/25" />
+
+          {/* Floating Subtle Sparkle on Desktop */}
+          <div className="absolute top-6 right-6 text-[#FDE8B3]/40 animate-float pointer-events-none hidden md:block">
+            <Sparkles className="w-6 h-6" />
+          </div>
+
+          {/* Integrated Editorial Typography & CTA */}
+          <div className="relative z-10 w-full p-5 sm:p-8 lg:p-12 text-white flex flex-col items-start max-w-xl space-y-2.5 sm:space-y-4">
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-[#FFFFFF] border border-[#E8E2EE] shadow-2xs">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20">
               <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
-              <span className="text-[0.62rem] sm:text-[0.68rem] font-bold tracking-[0.18em] text-[#604E72] uppercase">
+              <span className="text-[0.62rem] sm:text-[0.68rem] font-bold tracking-[0.18em] text-[#FDE8B3] uppercase">
                 {data.badge}
               </span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-6xl font-medium text-[#2A2433] tracking-tight leading-[1.15]">
-              {data.headline.split('\n').map((line, i) => (
-                <span key={i} className="block">
-                  {line}
-                </span>
-              ))}
+            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium text-white tracking-tight leading-[1.12]">
+              {data.headline}
             </h1>
 
-            {/* Subheadline */}
-            <p className="text-xs sm:text-base text-[#7E6A94] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal line-clamp-2 sm:line-clamp-none">
+            {/* Concise Subheadline */}
+            <p className="text-xs sm:text-sm text-[#EFEAF6]/90 max-w-md font-normal leading-relaxed line-clamp-2 sm:line-clamp-none">
               {data.subheadline}
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-row items-center justify-center lg:justify-start gap-2.5 sm:gap-4 pt-1 sm:pt-3">
+            {/* High-Converting CTA Button Row */}
+            <div className="flex items-center gap-2 sm:gap-3 pt-1.5 sm:pt-2 w-full sm:w-auto">
               <Link
                 href={data.primary_cta_link}
-                className="flex-1 sm:flex-initial px-5 py-2.5 sm:px-8 sm:py-3.5 rounded-full bg-[#4A3E56] hover:bg-[#362945] text-white text-[0.72rem] sm:text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-dream transition-all hover:scale-[1.02]"
+                className="flex-1 sm:flex-initial px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-full bg-white hover:bg-[#FAF3DE] text-[#241B2E] text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-dream transition-all hover:scale-[1.02]"
               >
                 <span>{data.primary_cta_text}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -77,47 +84,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
 
               <Link
                 href={data.secondary_cta_link}
-                className="flex-1 sm:flex-initial px-4 py-2.5 sm:px-7 sm:py-3.5 rounded-full bg-white border border-[#E8E2EE] hover:border-[#9F8EB9] hover:bg-[#F3EEF8] text-[#4A3E56] text-[0.72rem] sm:text-xs font-semibold uppercase tracking-wider transition-all text-center"
+                className="px-5 py-2.5 sm:px-6 sm:py-3.5 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 text-white text-xs font-semibold uppercase tracking-wider transition-all text-center"
               >
                 {data.secondary_cta_text}
               </Link>
             </div>
-
-            {/* Mini Trust Line */}
-            <div className="pt-2 sm:pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-[0.65rem] sm:text-[0.72rem] text-[#7E6A94]">
-              <div className="flex items-center gap-1">
-                <span className="text-[#D4AF37]">✦</span>
-                <span>100% GOTS Organic</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-[#D4AF37]">✦</span>
-                <span>Hypoallergenic</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-[#D4AF37]">✦</span>
-                <span>Ethically Crafted</span>
-              </div>
-            </div>
           </div>
+        </div>
 
-          {/* Right Image Composition */}
-          <div className="lg:col-span-6 relative mt-1 sm:mt-0">
-            <div className="relative mx-auto max-w-lg lg:max-w-none">
-              {/* Outer decorative ring */}
-              <div className="absolute -inset-2 sm:-inset-3 rounded-[1.8rem] sm:rounded-[2.5rem] bg-gradient-to-tr from-[#EFEAF6] via-[#FAF3DE] to-[#FCEEF2] -z-10 blur-xs" />
-
-              {/* Main Lifestyle Hero Photo */}
-              <div className="relative aspect-[16/10] sm:aspect-[16/11] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-dream-lg border border-[#FFFFFF]/80">
-                <Image
-                  src={data.image_url}
-                  alt="Little Dreamers Club Lifestyle"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover hover:scale-103 transition-transform duration-700 ease-out"
-                />
-              </div>
-            </div>
+        {/* Clean Luxury Trust Strip Directly Below Banner */}
+        <div className="mt-3.5 sm:mt-5 flex items-center justify-between sm:justify-center gap-2 sm:gap-8 px-2 sm:px-6 py-2.5 rounded-xl bg-white/70 border border-[#E8E2EE] text-[0.62rem] sm:text-xs text-[#604E72] font-medium">
+          <div className="flex items-center gap-1 sm:gap-1.5">
+            <span className="text-[#D4AF37]">✦</span>
+            <span>100% GOTS Organic</span>
+          </div>
+          <span className="text-[#D4AF37]/50">•</span>
+          <div className="flex items-center gap-1 sm:gap-1.5">
+            <span className="text-[#D4AF37]">✦</span>
+            <span>Hypoallergenic Modal</span>
+          </div>
+          <span className="text-[#D4AF37]/50">•</span>
+          <div className="flex items-center gap-1 sm:gap-1.5">
+            <span className="text-[#D4AF37]">✦</span>
+            <span>Heirloom Keepsakes</span>
           </div>
         </div>
       </div>
