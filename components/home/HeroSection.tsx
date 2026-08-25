@@ -60,9 +60,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
   return (
     <section className="pt-2 sm:pt-4 pb-8 sm:pb-12 bg-[#FAF8F5]">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
-        {/* Main Editorial Hero Card */}
-        <div className="relative w-full rounded-[2rem] sm:rounded-[2.8rem] overflow-hidden bg-[#FAF6F0] shadow-dream min-h-[420px] sm:min-h-[480px] lg:min-h-[540px] flex items-center">
-          {/* Background Image: Baby on Right Half */}
+        {/* Main Editorial Hero Card with 16:9 oriented ratio */}
+        <div className="relative w-full rounded-[2rem] sm:rounded-[2.8rem] overflow-hidden bg-[#FAF6F0] shadow-dream aspect-[16/11] sm:aspect-[16/9] min-h-[370px] sm:min-h-[460px] lg:min-h-[520px] flex items-center">
+          {/* Background Image: Baby shifted to right to avoid any text overlap */}
           <div className="absolute inset-0">
             <Image
               src={data.image_url}
@@ -70,16 +70,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               fill
               priority
               sizes="100vw"
-              className="object-cover object-[75%_center] sm:object-center"
+              className="object-cover object-[88%_center] sm:object-[center_center]"
             />
-            {/* Very subtle soft blend on left edge */}
-            <div className="absolute inset-y-0 left-0 w-3/4 sm:w-1/2 bg-gradient-to-r from-white/40 via-white/10 to-transparent pointer-events-none" />
+            {/* Soft White Gradient at the back of text on the left */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/75 to-transparent w-[85%] sm:w-[60%] pointer-events-none" />
           </div>
 
           {/* Left Content Column */}
-          <div className="relative z-10 w-full p-6 sm:p-10 lg:p-14 max-w-sm sm:max-w-md lg:max-w-lg space-y-3 sm:space-y-4">
+          <div className="relative z-10 w-full p-5 sm:p-10 lg:p-14 max-w-[260px] sm:max-w-md lg:max-w-lg space-y-2.5 sm:space-y-3.5">
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF3F0]/90 backdrop-blur-xs border border-[#FADCD5] shadow-2xs">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF3F0]/95 backdrop-blur-xs border border-[#FADCD5] shadow-2xs">
               <Sparkles className="w-3 h-3 text-[#D06B60]" />
               <span className="text-[0.68rem] sm:text-xs font-semibold text-[#D06B60]">
                 {data.badge}
@@ -87,7 +87,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
             </div>
 
             {/* Main Headline */}
-            <h1 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-medium text-[#2E243A] tracking-tight leading-[1.12]">
+            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium text-[#2E243A] tracking-tight leading-[1.12]">
               {data.headline.split('\n').map((line, idx) => (
                 <span key={idx} className="block">
                   {line}
@@ -96,15 +96,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-xs sm:text-sm text-[#6C5E78] leading-relaxed font-normal max-w-[240px] sm:max-w-xs">
+            <p className="text-xs sm:text-sm text-[#6C5E78] leading-relaxed font-normal max-w-[220px] sm:max-w-xs">
               {data.subheadline}
             </p>
 
             {/* CTA Button */}
-            <div className="pt-2 sm:pt-3">
+            <div className="pt-1.5 sm:pt-2.5">
               <Link
                 href={data.primary_cta_link}
-                className="inline-flex items-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full bg-[#392E46] hover:bg-[#281F33] text-white text-xs sm:text-sm font-semibold shadow-sm transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-full bg-[#392E46] hover:bg-[#281F33] text-white text-xs sm:text-sm font-semibold shadow-sm transition-all hover:scale-[1.02]"
               >
                 <span>{data.primary_cta_text}</span>
                 <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
