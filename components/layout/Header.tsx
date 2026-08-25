@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Search, ShoppingBag, Heart, User, Menu, ShieldCheck } from 'lucide-react';
 import { BrandLogo } from '../ui/BrandLogo';
-import { AnnouncementBar } from './AnnouncementBar';
 import { SearchOverlay } from './SearchOverlay';
 import { MobileNav } from './MobileNav';
 import { CartDrawer } from '../cart/CartDrawer';
@@ -38,9 +37,6 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      {/* Top Announcement Bar */}
-      <AnnouncementBar />
-
       {/* Main Header Bar */}
       <header className="sticky top-0 z-40 w-full glass-nav transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-24 flex items-center justify-between">
