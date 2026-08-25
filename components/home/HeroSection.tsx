@@ -58,8 +58,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
   };
 
   return (
-    <section className="pt-2 sm:pt-4 pb-3 sm:pb-5 bg-[#FAF8F5]">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 space-y-4 sm:space-y-5">
+    <section className="pt-2 sm:pt-4 pb-5 sm:pb-8 bg-[#FAF8F5]">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 space-y-4 sm:space-y-6">
         {/* Main Editorial Hero Card with 16:9 oriented ratio */}
         <div className="relative w-full rounded-[2rem] sm:rounded-[2.8rem] overflow-hidden bg-[#FAF6F0] shadow-dream aspect-[16/11] sm:aspect-[16/9] min-h-[370px] sm:min-h-[460px] lg:min-h-[520px] flex items-center">
           {/* Background Image: Baby shifted to right to avoid any text overlap */}
