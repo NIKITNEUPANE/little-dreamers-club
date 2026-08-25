@@ -30,7 +30,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#FAF4FC]/80 via-[#FAF8F5] to-[#FAF8F5] pt-8 pb-14 sm:pb-18 lg:pt-14 lg:pb-22">
+    <section className="relative overflow-hidden bg-gradient-to-b from-[#FAF4FC]/80 via-[#FAF8F5] to-[#FAF8F5] pt-4 pb-8 sm:py-12 lg:pt-14 lg:pb-20">
       {/* Delicate floating background stars / shapes */}
       <div className="absolute top-12 left-10 text-[#D4AF37]/30 animate-float pointer-events-none hidden md:block">
         <Sparkles className="w-8 h-8" />
@@ -40,19 +40,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
           {/* Left Text Column */}
-          <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
+          <div className="lg:col-span-6 space-y-3.5 sm:space-y-6 text-center lg:text-left">
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFFFFF] border border-[#E8E2EE] shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
-              <span className="text-[0.68rem] font-bold tracking-[0.2em] text-[#604E72] uppercase">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-[#FFFFFF] border border-[#E8E2EE] shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
+              <span className="text-[0.62rem] sm:text-[0.68rem] font-bold tracking-[0.18em] text-[#604E72] uppercase">
                 {data.badge}
               </span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-medium text-[#2A2433] tracking-tight leading-[1.12]">
+            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-6xl font-medium text-[#2A2433] tracking-tight leading-[1.15]">
               {data.headline.split('\n').map((line, i) => (
                 <span key={i} className="block">
                   {line}
@@ -61,39 +61,39 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-sm sm:text-base text-[#7E6A94] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+            <p className="text-xs sm:text-base text-[#7E6A94] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal line-clamp-2 sm:line-clamp-none">
               {data.subheadline}
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-3">
+            <div className="flex flex-row items-center justify-center lg:justify-start gap-2.5 sm:gap-4 pt-1 sm:pt-3">
               <Link
                 href={data.primary_cta_link}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#4A3E56] hover:bg-[#362945] text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 shadow-dream transition-all hover:scale-[1.02]"
+                className="flex-1 sm:flex-initial px-5 py-2.5 sm:px-8 sm:py-3.5 rounded-full bg-[#4A3E56] hover:bg-[#362945] text-white text-[0.72rem] sm:text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-dream transition-all hover:scale-[1.02]"
               >
                 <span>{data.primary_cta_text}</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
               <Link
                 href={data.secondary_cta_link}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white border border-[#E8E2EE] hover:border-[#9F8EB9] hover:bg-[#F3EEF8] text-[#4A3E56] text-xs font-semibold uppercase tracking-wider transition-all"
+                className="flex-1 sm:flex-initial px-4 py-2.5 sm:px-7 sm:py-3.5 rounded-full bg-white border border-[#E8E2EE] hover:border-[#9F8EB9] hover:bg-[#F3EEF8] text-[#4A3E56] text-[0.72rem] sm:text-xs font-semibold uppercase tracking-wider transition-all text-center"
               >
                 {data.secondary_cta_text}
               </Link>
             </div>
 
             {/* Mini Trust Line */}
-            <div className="pt-4 flex items-center justify-center lg:justify-start gap-6 text-[0.72rem] text-[#7E6A94]">
-              <div className="flex items-center gap-1.5">
+            <div className="pt-2 sm:pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-[0.65rem] sm:text-[0.72rem] text-[#7E6A94]">
+              <div className="flex items-center gap-1">
                 <span className="text-[#D4AF37]">✦</span>
                 <span>100% GOTS Organic</span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1">
                 <span className="text-[#D4AF37]">✦</span>
-                <span>Hypoallergenic & Gentle</span>
+                <span>Hypoallergenic</span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1">
                 <span className="text-[#D4AF37]">✦</span>
                 <span>Ethically Crafted</span>
               </div>
@@ -101,13 +101,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
           </div>
 
           {/* Right Image Composition */}
-          <div className="lg:col-span-6 relative">
+          <div className="lg:col-span-6 relative mt-1 sm:mt-0">
             <div className="relative mx-auto max-w-lg lg:max-w-none">
               {/* Outer decorative ring */}
-              <div className="absolute -inset-3 rounded-[2.5rem] bg-gradient-to-tr from-[#EFEAF6] via-[#FAF3DE] to-[#FCEEF2] -z-10 blur-xs" />
+              <div className="absolute -inset-2 sm:-inset-3 rounded-[1.8rem] sm:rounded-[2.5rem] bg-gradient-to-tr from-[#EFEAF6] via-[#FAF3DE] to-[#FCEEF2] -z-10 blur-xs" />
 
               {/* Main Lifestyle Hero Photo */}
-              <div className="relative aspect-[4/3] sm:aspect-[16/11] rounded-[2rem] overflow-hidden shadow-dream-lg border border-[#FFFFFF]/80">
+              <div className="relative aspect-[16/10] sm:aspect-[16/11] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-dream-lg border border-[#FFFFFF]/80">
                 <Image
                   src={data.image_url}
                   alt="Little Dreamers Club Lifestyle"

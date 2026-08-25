@@ -70,24 +70,24 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
       </div>
 
       {/* Card Content Body */}
-      <div className="p-3.5 sm:p-4.5 flex flex-col justify-between flex-1 space-y-2">
-        <div className="space-y-1">
-          <span className="text-[0.65rem] font-bold text-[#D4AF37] uppercase tracking-wider block">
+      <div className="p-2.5 sm:p-4 flex flex-col justify-between flex-1 space-y-1 sm:space-y-2">
+        <div className="space-y-0.5">
+          <span className="text-[0.55rem] sm:text-[0.65rem] font-bold text-[#D4AF37] uppercase tracking-wider block">
             {product.category_name || 'Heirloom Collection'}
           </span>
 
-          <h3 className="font-editorial text-xs sm:text-sm font-semibold text-[#2A2433] group-hover:text-[#604E72] transition-colors line-clamp-1 leading-snug">
+          <h3 className="font-editorial text-[0.78rem] sm:text-sm font-semibold text-[#2A2433] group-hover:text-[#604E72] transition-colors line-clamp-1 leading-snug">
             {product.name}
           </h3>
         </div>
 
         {/* Price Row */}
-        <div className="pt-0.5 flex items-baseline gap-2">
+        <div className="pt-0.5 flex items-baseline gap-1.5 sm:gap-2">
           <span className="font-bold text-xs sm:text-sm text-[#4A3E56]">
             {formatCurrency(product.base_price)}
           </span>
           {product.compare_at_price && (
-            <span className="text-[0.68rem] text-[#9F8EB9] line-through">
+            <span className="text-[0.62rem] sm:text-[0.68rem] text-[#9F8EB9] line-through">
               {formatCurrency(product.compare_at_price)}
             </span>
           )}

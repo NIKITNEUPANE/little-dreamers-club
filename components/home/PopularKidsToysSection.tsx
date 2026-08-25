@@ -175,24 +175,24 @@ const ToyCard: React.FC<{ toy: ToyItem }> = ({ toy }) => {
       </div>
 
       {/* Card Content Body */}
-      <div className="p-3.5 sm:p-4.5 flex flex-col justify-between flex-1 space-y-2">
-        <div className="space-y-1">
-          <span className="text-[0.65rem] font-bold text-[#D4AF37] uppercase tracking-wider block">
+      <div className="p-2.5 sm:p-4 flex flex-col justify-between flex-1 space-y-1 sm:space-y-2">
+        <div className="space-y-0.5">
+          <span className="text-[0.55rem] sm:text-[0.65rem] font-bold text-[#D4AF37] uppercase tracking-wider block">
             {toy.ageRange}
           </span>
 
-          <h3 className="font-editorial text-xs sm:text-sm font-semibold text-[#2A2433] group-hover:text-[#604E72] transition-colors line-clamp-1 leading-snug">
+          <h3 className="font-editorial text-[0.78rem] sm:text-sm font-semibold text-[#2A2433] group-hover:text-[#604E72] transition-colors line-clamp-1 leading-snug">
             {toy.name}
           </h3>
         </div>
 
         {/* Price Row */}
-        <div className="pt-0.5 flex items-baseline gap-2">
+        <div className="pt-0.5 flex items-baseline gap-1.5 sm:gap-2">
           <span className="font-bold text-xs sm:text-sm text-[#4A3E56]">
             {formatCurrency(toy.price)}
           </span>
           {toy.compareAtPrice && (
-            <span className="text-[0.68rem] text-[#9F8EB9] line-through">
+            <span className="text-[0.62rem] sm:text-[0.68rem] text-[#9F8EB9] line-through">
               {formatCurrency(toy.compareAtPrice)}
             </span>
           )}
@@ -204,16 +204,16 @@ const ToyCard: React.FC<{ toy: ToyItem }> = ({ toy }) => {
 
 export const PopularKidsToysSection: React.FC = () => {
   return (
-    <section className="py-12 sm:py-16 bg-[#FAF8F5] relative overflow-hidden border-t border-[#E8E2EE]">
+    <section className="py-8 sm:py-14 bg-[#FAF8F5] relative overflow-hidden border-t border-[#E8E2EE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Left-Aligned Header with Right Link */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10 pb-6 border-b border-[#E8E2EE]">
-          <div className="space-y-2 text-left">
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold tracking-[0.2em] text-[#604E72] uppercase">
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 mb-5 sm:mb-8 pb-4 sm:pb-6 border-b border-[#E8E2EE]">
+          <div className="space-y-1 sm:space-y-2 text-left">
+            <div className="inline-flex items-center gap-1.5 text-[0.62rem] sm:text-xs font-bold tracking-[0.2em] text-[#604E72] uppercase">
+              <Sparkles className="w-3 h-3 text-[#D4AF37]" />
               <span>Play & Imagination</span>
             </div>
-            <h2 className="font-editorial text-3xl sm:text-4xl font-medium text-[#2A2433] tracking-tight">
+            <h2 className="font-editorial text-xl sm:text-3xl lg:text-4xl font-medium text-[#2A2433] tracking-tight">
               Popular Kids Toys
             </h2>
             <p className="text-xs sm:text-sm text-[#7E6A94]">
@@ -223,28 +223,28 @@ export const PopularKidsToysSection: React.FC = () => {
 
           <Link
             href="/shop?category=toys"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#4A3E56] hover:text-[#604E72] group whitespace-nowrap"
+            className="inline-flex items-center gap-1.5 text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider text-[#4A3E56] hover:text-[#604E72] group whitespace-nowrap"
           >
             <span>View All Toys & Plush</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
         {/* 8-Card Toy Grid with Enclosed Luxury Box Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
           {TOYS_DATA.map((toy) => (
             <ToyCard key={toy.id} toy={toy} />
           ))}
         </div>
 
         {/* Bottom CTA to View All Toys */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-8 sm:mt-12">
           <Link
             href="/shop?category=toys"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white border border-[#E8E2EE] hover:bg-[#FAF4FC] text-[#4A3E56] text-xs font-semibold uppercase tracking-wider shadow-xs transition-all hover:scale-[1.02]"
+            className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-3.5 rounded-full bg-white border border-[#E8E2EE] hover:bg-[#FAF4FC] text-[#4A3E56] text-[0.72rem] sm:text-xs font-semibold uppercase tracking-wider shadow-xs transition-all hover:scale-[1.02]"
           >
             <span>Explore All Toys & Imagination</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </Link>
         </div>
       </div>

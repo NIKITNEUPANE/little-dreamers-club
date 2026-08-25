@@ -39,7 +39,7 @@ export const Header: React.FC = () => {
     <>
       {/* Main Header Bar */}
       <header className="sticky top-0 z-40 w-full glass-nav transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-24 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 lg:h-24 flex items-center justify-between">
           {/* Mobile Menu Button (Left on Mobile) */}
           <div className="flex items-center gap-3 lg:hidden">
             <button

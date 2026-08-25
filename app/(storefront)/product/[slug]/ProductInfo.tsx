@@ -80,46 +80,46 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3.5 sm:space-y-6">
       {/* Category & Rating */}
       <div className="flex items-center justify-between text-xs text-[#7E6A94]">
-        <span className="uppercase tracking-widest font-semibold text-[#604E72]">
+        <span className="uppercase tracking-widest font-semibold text-[0.65rem] sm:text-xs text-[#604E72]">
           {product.category_name}
         </span>
-        <a href="#reviews" className="flex items-center gap-1.5 font-semibold text-[#4A3E56] hover:underline">
+        <a href="#reviews" className="flex items-center gap-1.5 font-semibold text-[#4A3E56] hover:underline text-xs">
           <div className="flex text-[#D4AF37]">
             {[1, 2, 3, 4, 5].map((s) => (
-              <Star key={s} className="w-3.5 h-3.5 fill-[#D4AF37]" />
+              <Star key={s} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#D4AF37]" />
             ))}
           </div>
           <span>{product.rating.toFixed(1)}</span>
-          <span className="text-[#9F8EB9]">({product.review_count} reviews)</span>
+          <span className="text-[#9F8EB9]">({product.review_count})</span>
         </a>
       </div>
 
       {/* Product Title */}
-      <h1 className="font-editorial text-3xl sm:text-4xl font-semibold text-[#2A2433] leading-tight">
+      <h1 className="font-editorial text-xl sm:text-2xl lg:text-3xl font-medium text-[#2A2433] leading-snug">
         {product.name}
       </h1>
 
       {/* Pricing */}
-      <div className="flex items-baseline gap-3">
-        <span className="font-editorial text-2xl sm:text-3xl font-bold text-[#4A3E56]">
+      <div className="flex items-baseline gap-2 sm:gap-3">
+        <span className="font-editorial text-xl sm:text-2xl lg:text-3xl font-bold text-[#4A3E56]">
           {formatCurrency(unitPrice)}
         </span>
         {product.compare_at_price && (
-          <span className="text-base text-[#9F8EB9] line-through">
+          <span className="text-xs sm:text-base text-[#9F8EB9] line-through">
             {formatCurrency(product.compare_at_price + (monogram ? monogram.price : 0))}
           </span>
         )}
         {product.compare_at_price && (
-          <span className="px-2.5 py-0.5 rounded-full bg-[#FAF3DE] text-[#B89324] text-xs font-bold uppercase tracking-wider">
+          <span className="px-2 py-0.5 rounded-full bg-[#FAF3DE] text-[#B89324] text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider">
             Save {Math.round(((product.compare_at_price - selectedVariant.price) / product.compare_at_price) * 100)}%
           </span>
         )}
         {monogram && (
-          <span className="inline-flex items-center gap-1 text-[0.7rem] font-bold text-[#604E72] bg-[#EFEAF6] px-2.5 py-0.5 rounded-full">
-            <Sparkles className="w-3 h-3 text-[#D4AF37]" /> Incl. Monogram
+          <span className="inline-flex items-center gap-1 text-[0.65rem] sm:text-[0.7rem] font-bold text-[#604E72] bg-[#EFEAF6] px-2 py-0.5 rounded-full">
+            <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#D4AF37]" /> Incl. Monogram
           </span>
         )}
       </div>
