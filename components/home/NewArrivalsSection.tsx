@@ -16,8 +16,8 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({ products
   return (
     <section className="pt-4 sm:pt-6 pb-8 sm:pb-12 bg-[#FAF8F5] relative overflow-hidden border-t border-[#E8E2EE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Left-Aligned Header with Right Link */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-2.5 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-[#E8E2EE]">
+        {/* Left-Aligned Header with Right Link on all screens */}
+        <div className="flex items-end justify-between gap-3 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-[#E8E2EE]">
           <div className="space-y-1 sm:space-y-1.5 text-left">
             <div className="inline-flex items-center gap-1.5 text-[0.62rem] sm:text-xs font-bold tracking-[0.2em] text-[#604E72] uppercase">
               <Sparkles className="w-3 h-3 text-[#D4AF37]" />
@@ -33,10 +33,10 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({ products
 
           <Link
             href="/shop?sort=newest"
-            className="inline-flex items-center gap-1.5 text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider text-[#4A3E56] hover:text-[#604E72] group whitespace-nowrap"
+            className="inline-flex items-center gap-1 sm:gap-1.5 text-[0.72rem] sm:text-xs font-bold uppercase tracking-wider text-[#4A3E56] hover:text-[#604E72] group whitespace-nowrap shrink-0 pb-0.5"
           >
-            <span>View All New Pieces</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            <span>New Pieces</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
 
