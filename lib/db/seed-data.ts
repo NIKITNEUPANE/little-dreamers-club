@@ -89,7 +89,7 @@ export const INITIAL_COLLECTIONS: Collection[] = [
 export const INITIAL_PRODUCTS: Product[] = [
   {
     id: 'prod-pajamas',
-    name: 'Cloudy Dreams Organic Pajama Set',
+    name: 'Cloudy Dreams Pajamas',
     slug: 'cloudy-dreams-organic-pajama-set',
     sku: 'LDC-PJ-001',
     category_id: 'cat-sleepwear',
@@ -220,7 +220,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: 'prod-blanket',
-    name: 'Little Moon Cashmere Knit Blanket',
+    name: 'Cashmere Moon Blanket',
     slug: 'little-moon-cashmere-knit-blanket',
     sku: 'LDC-BK-002',
     category_id: 'cat-nursery',
@@ -296,7 +296,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: 'prod-romper',
-    name: 'Lavender Star Ribbed Romper',
+    name: 'Lavender Star Romper',
     slug: 'lavender-star-ribbed-romper',
     sku: 'LDC-RP-003',
     category_id: 'cat-clothing',
@@ -381,7 +381,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: 'prod-plush',
-    name: 'Dream Bunny Heirloom Organic Plush',
+    name: 'Heirloom Dream Bunny',
     slug: 'dream-bunny-heirloom-organic-plush',
     sku: 'LDC-TY-004',
     category_id: 'cat-toys',
@@ -433,7 +433,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: 'prod-backpack',
-    name: 'Tiny Explorer Mini Canvas Backpack',
+    name: 'Tiny Explorer Backpack',
     slug: 'tiny-explorer-mini-canvas-backpack',
     sku: 'LDC-BP-005',
     category_id: 'cat-accessories',
@@ -496,7 +496,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: 'prod-gift-hamper',
-    name: 'Little Welcome Heirloom Gift Hamper',
+    name: 'Little Welcome Hamper',
     slug: 'little-welcome-heirloom-gift-hamper',
     sku: 'LDC-GH-006',
     category_id: 'cat-gifts',
@@ -693,7 +693,7 @@ export const INITIAL_ORDERS: Order[] = [
       {
         id: 'item-101',
         product_variant_id: 'var-pj-lav-612m',
-        product_name: 'Cloudy Dreams Organic Pajama Set',
+        product_name: 'Cloudy Dreams Pajamas',
         variant_details: 'Size: 6-12M, Color: Soft Lavender',
         unit_price: 3450,
         quantity: 2,
@@ -734,7 +734,7 @@ export const INITIAL_ORDERS: Order[] = [
       {
         id: 'item-102',
         product_variant_id: 'var-bk-crm-std',
-        product_name: 'Little Moon Cashmere Knit Blanket',
+        product_name: 'Cashmere Moon Blanket',
         variant_details: 'Size: One Size (100x80cm), Color: Ivory Cream & Lavender',
         unit_price: 6800,
         quantity: 1,

@@ -14,11 +14,11 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({ products
   const displayProducts = products.slice(0, 8);
 
   return (
-    <section className="py-8 sm:py-14 bg-[#FAF8F5] relative overflow-hidden border-t border-[#E8E2EE]">
+    <section className="pt-4 sm:pt-6 pb-8 sm:pb-12 bg-[#FAF8F5] relative overflow-hidden border-t border-[#E8E2EE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Left-Aligned Header with Right Link */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 mb-5 sm:mb-8 pb-4 sm:pb-6 border-b border-[#E8E2EE]">
-          <div className="space-y-1 sm:space-y-2 text-left">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-2.5 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-[#E8E2EE]">
+          <div className="space-y-1 sm:space-y-1.5 text-left">
             <div className="inline-flex items-center gap-1.5 text-[0.62rem] sm:text-xs font-bold tracking-[0.2em] text-[#604E72] uppercase">
               <Sparkles className="w-3 h-3 text-[#D4AF37]" />
               <span>New Heirloom Arrivals</span>
@@ -27,7 +27,7 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({ products
               New In The Club
             </h2>
             <p className="text-xs sm:text-sm text-[#7E6A94]">
-              Delicate organic sleepwear, knitwear, and accessories freshly arrived in the boutique.
+              Freshly arrived heirloom treasures.
             </p>
           </div>
 
