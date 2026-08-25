@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { X, Heart, User, Sparkles, ChevronRight, ShieldCheck, ShoppingBag } from 'lucide-react';
 import { BrandLogo } from '../ui/BrandLogo';
 import { useMobileMenu } from '../../lib/store/useMobileMenuStore';
@@ -50,13 +51,24 @@ export const MobileNav: React.FC = () => {
       {/* Sliding Sidebar Panel */}
       <div className="fixed inset-y-0 left-0 max-w-full flex pr-10 z-[101] pointer-events-auto">
         <aside className="w-screen max-w-xs sm:max-w-sm bg-[#FAF8F5] shadow-2xl flex flex-col border-r border-[#E8E2EE] animate-in slide-in-from-left duration-300">
-          {/* Top Header */}
-          <div className="p-4 sm:p-5 border-b border-[#E8E2EE] flex items-center justify-between bg-white">
-            <BrandLogo variant="compact" />
+          {/* Compact Top Header with Brand Text & Logo */}
+          <div className="px-4 py-3 sm:px-5 sm:py-3.5 border-b border-[#E8E2EE] flex items-center justify-between bg-white">
+            <Link href="/" onClick={closeMenu} className="flex items-center gap-2.5">
+              <Image
+                src="/images/brand-logo-transparent.png"
+                alt="Little Dreamers Club"
+                width={32}
+                height={32}
+                className="w-7 h-7 object-contain"
+              />
+              <span className="font-editorial text-sm font-bold text-[#362945] tracking-tight">
+                Little Dreamers Club
+              </span>
+            </Link>
             <button
               type="button"
               onClick={closeMenu}
-              className="p-2 rounded-full text-[#7E6A94] hover:text-[#2A2433] hover:bg-[#EFEAF6] transition-colors cursor-pointer"
+              className="p-1.5 rounded-full text-[#7E6A94] hover:text-[#2A2433] hover:bg-[#EFEAF6] transition-colors cursor-pointer"
               aria-label="Close menu"
             >
               <X className="w-5 h-5" />
@@ -148,13 +160,6 @@ export const MobileNav: React.FC = () => {
               </div>
               <ChevronRight className="w-4 h-4 text-[#9F8EB9]" />
             </Link>
-          </div>
-
-          {/* Footer Info */}
-          <div className="p-4 sm:p-5 border-t border-[#E8E2EE] bg-[#FFFFFF] text-xs text-[#7E6A94] space-y-1">
-            <p className="font-semibold text-[#362945]">Little Dreamers Club</p>
-            <p>Heirloom sleepwear & dreamy keepsakes.</p>
-            <p className="pt-1 text-[0.68rem] text-[#9F8EB9]">care@littledreamersclub.com</p>
           </div>
         </aside>
       </div>
