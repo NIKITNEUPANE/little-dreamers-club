@@ -73,14 +73,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               sizes="100vw"
               className="object-cover object-[94%_center] sm:object-[center_center]"
             />
-            {/* Very gentle soft blend strictly on left 42% under text */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/15 to-transparent w-[44%] sm:w-[40%] pointer-events-none" />
+            {/* Ultra-subtle minimal 1-2% gradient feather strictly behind text */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/25 via-white/5 to-transparent w-[38%] pointer-events-none" />
           </div>
 
           {/* Left Content Column (Strictly constrained so text never touches baby) */}
           <div className="relative z-10 w-full p-5 sm:p-10 lg:p-14 max-w-[210px] sm:max-w-md lg:max-w-lg space-y-2 sm:space-y-3.5">
-            {/* Main Headline */}
-            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium text-[#2E243A] tracking-tight leading-[1.14]">
+            {/* Main Headline with subtle drop shadow for crisp clarity */}
+            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium text-[#261D32] tracking-tight leading-[1.14] drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)]">
               {data.headline.split('\n').map((line, idx) => (
                 <span key={idx} className="block">
                   {line}
@@ -88,16 +88,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               ))}
             </h1>
 
-            {/* Subheadline */}
-            <p className="text-[0.72rem] sm:text-sm text-[#6C5E78] leading-relaxed font-normal max-w-[185px] sm:max-w-xs">
+            {/* Subheadline with subtle drop shadow */}
+            <p className="text-[0.72rem] sm:text-sm text-[#5B4C68] leading-relaxed font-medium max-w-[185px] sm:max-w-xs drop-shadow-[0_1px_1.5px_rgba(255,255,255,0.9)]">
               {data.subheadline}
             </p>
 
-            {/* Frosted Glass New Collection Action Button */}
+            {/* Frosted Glass New Collection Action Button with Shadow */}
             <div className="pt-1.5 sm:pt-3">
               <Link
                 href={data.primary_cta_link}
-                className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-full bg-[#FFF3F0]/95 hover:bg-[#FFEBE5] backdrop-blur-md border border-[#FADCD5] hover:border-[#F6C7BC] text-[#D06B60] text-[0.72rem] sm:text-sm font-semibold shadow-2xs hover:shadow-xs transition-all hover:scale-[1.03] group"
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-full bg-[#FFF3F0]/95 hover:bg-[#FFEBE5] backdrop-blur-md border border-[#FADCD5] hover:border-[#F6C7BC] text-[#D06B60] text-[0.72rem] sm:text-sm font-semibold shadow-[0_3px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] transition-all hover:scale-[1.03] group"
               >
                 <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#D06B60] group-hover:rotate-12 transition-transform" />
                 <span>New Collection</span>
