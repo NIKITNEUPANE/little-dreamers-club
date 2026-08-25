@@ -16,24 +16,16 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({ products
   return (
     <section className="pt-4 sm:pt-6 pb-8 sm:pb-12 bg-[#FAF8F5] relative overflow-hidden border-t border-[#E8E2EE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Left-Aligned Header with Right Link on all screens */}
-        <div className="flex items-end justify-between gap-3 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-[#E8E2EE]">
-          <div className="space-y-1 sm:space-y-1.5 text-left">
-            <div className="inline-flex items-center gap-1.5 text-[0.62rem] sm:text-xs font-bold tracking-[0.2em] text-[#604E72] uppercase">
-              <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-              <span>New Heirloom Arrivals</span>
-            </div>
-            <h2 className="font-editorial text-xl sm:text-3xl lg:text-4xl font-medium text-[#2A2433] tracking-tight">
-              New In The Club
-            </h2>
-            <p className="text-xs sm:text-sm text-[#7E6A94]">
-              Freshly arrived heirloom treasures.
-            </p>
-          </div>
+        {/* Clean Single Header Row with Left Logo and Right Link */}
+        <div className="flex items-center justify-between gap-3 sm:gap-4 mb-3.5 sm:mb-5 pb-2.5 sm:pb-3.5 border-b border-[#E8E2EE]">
+          <h2 className="inline-flex items-center gap-1.5 text-[0.7rem] sm:text-xs font-bold tracking-[0.2em] text-[#604E72] uppercase">
+            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
+            <span>New Heirloom Arrivals</span>
+          </h2>
 
           <Link
             href="/shop?sort=newest"
-            className="inline-flex items-center gap-1 sm:gap-1.5 text-[0.72rem] sm:text-xs font-bold uppercase tracking-wider text-[#4A3E56] hover:text-[#604E72] group whitespace-nowrap shrink-0 pb-0.5"
+            className="inline-flex items-center gap-1 sm:gap-1.5 text-[0.72rem] sm:text-xs font-bold uppercase tracking-wider text-[#4A3E56] hover:text-[#604E72] group whitespace-nowrap shrink-0"
           >
             <span>New Pieces</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
