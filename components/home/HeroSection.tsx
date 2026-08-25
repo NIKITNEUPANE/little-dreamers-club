@@ -70,11 +70,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               fill
               priority
               sizes="100vw"
-              className="object-cover object-[center_20%] sm:object-[center_25%]"
+              className="object-cover object-[75%_center] sm:object-center"
             />
-            {/* Soft Warm Scrim on Left for Text Readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5]/95 via-[#FAF8F5]/70 to-transparent sm:w-[60%]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F5]/90 via-[#FAF8F5]/30 to-transparent sm:hidden" />
+            {/* Very subtle soft blend on left edge */}
+            <div className="absolute inset-y-0 left-0 w-3/4 sm:w-1/2 bg-gradient-to-r from-white/40 via-white/10 to-transparent pointer-events-none" />
           </div>
 
           {/* Left Content Column */}
