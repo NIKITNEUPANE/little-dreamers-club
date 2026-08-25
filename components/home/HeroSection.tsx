@@ -51,8 +51,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
     headline: content?.headline || 'Where Little\nThings Become\nBig Dreams',
     subheadline:
       content?.subheadline ||
-      'Clothes and toys for every little adventure.',
-    primary_cta_text: content?.primary_cta_text || 'Shop New Arrivals',
+      'Thoughtfully made clothes and toys for every little adventure.',
+    primary_cta_text: content?.primary_cta_text || 'New Collection',
     primary_cta_link: content?.primary_cta_link || '/shop?sort=newest',
     image_url: content?.image_url || '/images/hero-lifestyle.jpg',
   };
@@ -73,8 +73,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               sizes="100vw"
               className="object-cover object-[94%_center] sm:object-[center_center]"
             />
-            {/* Ultra-subtle minimal 1-2% gradient feather strictly behind text */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/25 via-white/5 to-transparent w-[38%] pointer-events-none" />
+            {/* Soft, delicate white gradient wash strictly behind text area without touching baby */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/75 via-white/25 to-transparent w-[44%] sm:w-[38%] pointer-events-none" />
           </div>
 
           {/* Left Content Column (Strictly constrained so text never touches baby) */}
@@ -88,7 +88,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               ))}
             </h1>
 
-            {/* Subheadline with subtle drop shadow */}
+            {/* Subheadline with subtle drop shadow matching reference */}
             <p className="text-[0.72rem] sm:text-sm text-[#5B4C68] leading-relaxed font-medium max-w-[185px] sm:max-w-xs drop-shadow-[0_1px_1.5px_rgba(255,255,255,0.9)]">
               {data.subheadline}
             </p>
