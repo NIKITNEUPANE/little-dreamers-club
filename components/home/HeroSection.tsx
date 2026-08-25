@@ -51,7 +51,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
     headline: content?.headline || 'Where Little\nThings Become\nBig Dreams',
     subheadline:
       content?.subheadline ||
-      'Thoughtfully made clothes and toys for every little adventure.',
+      'Clothes and toys for every little adventure.',
     primary_cta_text: content?.primary_cta_text || 'Shop New Arrivals',
     primary_cta_link: content?.primary_cta_link || '/shop?sort=newest',
     image_url: content?.image_url || '/images/hero-lifestyle.jpg',
@@ -70,14 +70,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               fill
               priority
               sizes="100vw"
-              className="object-cover object-[88%_center] sm:object-[center_center]"
+              className="object-cover object-[94%_center] sm:object-[center_center]"
             />
-            {/* Very gentle soft blend strictly on left 45% (Leaves baby completely untouched and crisp) */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/20 to-transparent w-[48%] sm:w-[42%] pointer-events-none" />
+            {/* Very gentle soft blend strictly on left 42% under text */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/15 to-transparent w-[44%] sm:w-[40%] pointer-events-none" />
           </div>
 
-          {/* Left Content Column */}
-          <div className="relative z-10 w-full p-5 sm:p-10 lg:p-14 max-w-[260px] sm:max-w-md lg:max-w-lg space-y-2.5 sm:space-y-3.5">
+          {/* Left Content Column (Strictly constrained so text never touches baby) */}
+          <div className="relative z-10 w-full p-4 sm:p-10 lg:p-14 max-w-[200px] sm:max-w-md lg:max-w-lg space-y-2 sm:space-y-3.5">
             {/* Pill Badge */}
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF3F0]/95 backdrop-blur-xs border border-[#FADCD5] shadow-2xs">
               <Sparkles className="w-3 h-3 text-[#D06B60]" />
@@ -87,7 +87,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
             </div>
 
             {/* Main Headline */}
-            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium text-[#2E243A] tracking-tight leading-[1.12]">
+            <h1 className="font-editorial text-xl sm:text-4xl lg:text-5xl font-medium text-[#2E243A] tracking-tight leading-[1.14]">
               {data.headline.split('\n').map((line, idx) => (
                 <span key={idx} className="block">
                   {line}
@@ -96,18 +96,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-xs sm:text-sm text-[#6C5E78] leading-relaxed font-normal max-w-[220px] sm:max-w-xs">
+            <p className="text-[0.72rem] sm:text-sm text-[#6C5E78] leading-relaxed font-normal max-w-[185px] sm:max-w-xs">
               {data.subheadline}
             </p>
 
             {/* CTA Button */}
-            <div className="pt-1.5 sm:pt-2.5">
+            <div className="pt-1 sm:pt-2.5">
               <Link
                 href={data.primary_cta_link}
-                className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-full bg-[#392E46] hover:bg-[#281F33] text-white text-xs sm:text-sm font-semibold shadow-sm transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-7 sm:py-3 rounded-full bg-[#392E46] hover:bg-[#281F33] text-white text-[0.7rem] sm:text-sm font-semibold shadow-sm transition-all hover:scale-[1.02]"
               >
                 <span>{data.primary_cta_text}</span>
-                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
               </Link>
             </div>
           </div>

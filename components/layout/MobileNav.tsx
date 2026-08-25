@@ -26,15 +26,15 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose, wishlistC
   ];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden lg:hidden animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 overflow-hidden animate-in fade-in duration-200">
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-[#2A2433]/60 backdrop-blur-xs transition-opacity"
         onClick={onClose}
       />
 
-      <div className="fixed inset-y-0 left-0 max-w-full flex pr-12">
-        <div className="w-screen max-w-xs sm:max-w-sm bg-[#FAF8F5] shadow-2xl flex flex-col border-r border-[#E8E2EE]">
+      <div className="fixed inset-y-0 left-0 max-w-full flex pr-10">
+        <div className="w-screen max-w-xs sm:max-w-sm bg-[#FAF8F5] shadow-2xl flex flex-col border-r border-[#E8E2EE] animate-in slide-in-from-left duration-300">
           {/* Header */}
           <div className="p-5 border-b border-[#E8E2EE] flex items-center justify-between bg-white">
             <BrandLogo variant="compact" />
