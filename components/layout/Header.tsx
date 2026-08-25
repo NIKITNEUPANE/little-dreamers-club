@@ -10,6 +10,7 @@ import { CartDrawer } from '../cart/CartDrawer';
 import { useCart } from '../../lib/store/useCartStore';
 import { useWishlist } from '../../lib/store/useWishlistStore';
 import { useAuth } from '../../lib/store/useAuthStore';
+import { useMobileMenu } from '../../lib/store/useMobileMenuStore';
 
 const SEARCH_EXAMPLES = [
   "Search 'organic modal pajamas'...",
@@ -24,12 +25,12 @@ const SEARCH_EXAMPLES = [
 export const Header: React.FC = () => {
   const pathname = usePathname();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
+  const { openMenu } = useMobileMenu();
   const { itemCount, openCart } = useCart();
   const { count: wishlistCount } = useWishlist();
   const { user, isAdmin } = useAuth();
@@ -78,8 +79,9 @@ export const Header: React.FC = () => {
           {/* Mobile & Desktop Menu Trigger (Left) */}
           <div className="flex items-center shrink-0">
             <button
-              onClick={() => setIsMobileNavOpen(true)}
-              className="p-2 -ml-1 text-[#4A3E56] hover:text-[#2A2433] hover:bg-[#EFEAF6] rounded-full transition-colors"
+              type="button"
+              onClick={openMenu}
+              className="p-2 -ml-1 text-[#4A3E56] hover:text-[#2A2433] hover:bg-[#EFEAF6] rounded-full transition-colors cursor-pointer"
               aria-label="Open navigation menu"
             >
               <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -181,11 +183,7 @@ export const Header: React.FC = () => {
 
       {/* Global Overlays & Drawers */}
       <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-      <MobileNav
-        isOpen={isMobileNavOpen}
-        onClose={() => setIsMobileNavOpen(false)}
-        wishlistCount={wishlistCount}
-      />
+      <MobileNav />
       <CartDrawer />
     </>
   );
