@@ -101,21 +101,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
             </p>
 
             {/* CTA Button */}
-            <div className="pt-1.5 sm:pt-2">
+            <div className="pt-2 sm:pt-3">
               <Link
                 href={data.primary_cta_link}
-                className="inline-flex items-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full bg-[#392E46] hover:bg-[#281F33] text-white text-xs font-semibold shadow-sm transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full bg-[#392E46] hover:bg-[#281F33] text-white text-xs sm:text-sm font-semibold shadow-sm transition-all hover:scale-[1.02]"
               >
                 <span>{data.primary_cta_text}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </Link>
-            </div>
-
-            {/* Carousel Dots Indicator */}
-            <div className="pt-2 sm:pt-4 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#392E46]" />
-              <span className="w-2 h-2 rounded-full bg-[#DDD6E5]" />
-              <span className="w-2 h-2 rounded-full bg-[#DDD6E5]" />
             </div>
           </div>
         </div>
