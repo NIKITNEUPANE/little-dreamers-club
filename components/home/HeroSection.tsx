@@ -48,10 +48,10 @@ const CATEGORY_QUICK_LINKS = [
 export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
   const data = {
     badge: content?.badge || 'New Collection',
-    headline: content?.headline || 'Little Things\nBig Dreams',
+    headline: content?.headline || 'Little Things.\nBig Dreams.',
     subheadline:
       content?.subheadline ||
-      'Clothes and toys for every little adventure.',
+      'Clothes and toys for every\nlittle adventure.',
     primary_cta_text: content?.primary_cta_text || 'New Collection',
     primary_cta_link: content?.primary_cta_link || '/shop?sort=newest',
     image_url: content?.image_url || '/images/hero-lifestyle.jpg',
@@ -66,7 +66,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
           <div className="absolute inset-0">
             <Image
               src={data.image_url}
-              alt="Little Things Big Dreams"
+              alt="Little Things. Big Dreams."
               fill
               priority
               loading="eager"
@@ -79,18 +79,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
 
           {/* Left Content Column (Open, comfortable line spacing) */}
           <div className="relative z-10 w-full p-5 sm:p-10 lg:p-14 max-w-[215px] sm:max-w-md lg:max-w-lg flex flex-col justify-center">
-            {/* Main Headline with luxury editorial serif font */}
-            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium text-[#241A30] tracking-tight leading-[1.16] mb-3.5 sm:mb-4.5">
-              {data.headline.split('\n').map((line, idx) => (
-                <span key={idx} className="block">
-                  {line}
-                </span>
-              ))}
+            {/* Main Headline with dual-color palette matching reference image */}
+            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium tracking-tight leading-[1.16] mb-3.5 sm:mb-4.5">
+              <span className="block text-[#2D1F3D]">Little Things.</span>
+              <span className="block italic text-[#785B88] font-normal">Big Dreams.</span>
             </h1>
 
-            {/* Subheadline with breathing room */}
-            <p className="text-[0.74rem] sm:text-sm text-[#5B4C68] leading-[1.45] font-normal max-w-[185px] sm:max-w-xs mb-4 sm:mb-5">
-              {data.subheadline}
+            {/* Subheadline with little moved down next to adventure */}
+            <p className="text-[0.74rem] sm:text-sm text-[#5B4C68] leading-[1.45] font-normal max-w-[195px] sm:max-w-xs mb-4 sm:mb-5">
+              Clothes and toys for every<br />little adventure.
             </p>
 
             {/* Clickable New Collection Button at Bottom of Text with Logo on Left */}
