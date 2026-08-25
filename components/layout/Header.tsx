@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Search, ShoppingBag, Heart, User, Menu, ShieldCheck } from 'lucide-react';
 import { SearchOverlay } from './SearchOverlay';
@@ -75,39 +76,59 @@ export const Header: React.FC = () => {
           isVisible ? 'translate-y-0 shadow-xs' : '-translate-y-full shadow-none'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
-          {/* Mobile & Desktop Menu Trigger (Left) */}
-          <div className="flex items-center shrink-0">
+        <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-13 sm:h-16 flex items-center justify-between gap-1.5 sm:gap-4">
+          {/* Mobile & Desktop Menu Trigger + Brand Logo (Left) */}
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
             <button
               type="button"
               onClick={openMenu}
-              className="p-2 -ml-1 text-[#4A3E56] hover:text-[#2A2433] hover:bg-[#EFEAF6] rounded-full transition-colors cursor-pointer"
+              className="p-1.5 text-[#4A3E56] hover:text-[#2A2433] hover:bg-[#EFEAF6] rounded-full transition-colors cursor-pointer"
               aria-label="Open navigation menu"
             >
-              <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
+              <Menu className="w-5 h-5 sm:w-5.5 sm:h-5.5" />
             </button>
+
+            {/* Clickable Brand Logo Directing to Home */}
+            <Link
+              href="/"
+              className="flex items-center gap-1.5 group pr-0.5"
+              aria-label="Little Dreamers Club Home"
+              title="Little Dreamers Club"
+            >
+              <Image
+                src="/images/brand-logo-transparent.png"
+                alt="Little Dreamers Club"
+                width={34}
+                height={34}
+                className="w-7 h-7 sm:w-8 sm:h-8 object-contain transition-transform group-hover:scale-105"
+                priority
+              />
+              <span className="font-editorial text-xs sm:text-sm font-bold text-[#362945] hidden lg:inline tracking-tight">
+                Little Dreamers Club
+              </span>
+            </Link>
           </div>
 
           {/* Big Center Search Display with Cross-Fading Text Examples */}
-          <div className="flex-1 max-w-2xl mx-1 sm:mx-4">
+          <div className="flex-1 max-w-2xl mx-1 sm:mx-3">
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
-              className="w-full h-9 sm:h-10 px-3 sm:px-4 rounded-full bg-white/90 hover:bg-white border border-[#E8E2EE] hover:border-[#BEB2D4] shadow-2xs hover:shadow-xs flex items-center justify-between transition-all group text-left cursor-pointer"
+              className="w-full h-8 sm:h-9.5 px-2.5 sm:px-3.5 rounded-full bg-white/90 hover:bg-white border border-[#E8E2EE] hover:border-[#BEB2D4] shadow-2xs hover:shadow-xs flex items-center justify-between transition-all group text-left cursor-pointer"
               aria-label="Search catalog"
             >
-              <div className="flex items-center gap-2 sm:gap-2.5 overflow-hidden flex-1">
-                <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7E6A94] group-hover:text-[#604E72] shrink-0" />
+              <div className="flex items-center gap-1.5 sm:gap-2 overflow-hidden flex-1">
+                <Search className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#7E6A94] group-hover:text-[#604E72] shrink-0" />
                 
                 {/* Cross-fading placeholder carousel */}
-                <div className="relative h-5 overflow-hidden flex-1">
+                <div className="relative h-4 sm:h-5 overflow-hidden flex-1">
                   {SEARCH_EXAMPLES.map((example, idx) => (
                     <span
                       key={example}
-                      className={`absolute inset-0 text-xs sm:text-sm text-[#7E6A94] font-normal transition-all duration-700 ease-in-out flex items-center line-clamp-1 select-none ${
+                      className={`absolute inset-0 text-[0.7rem] sm:text-xs text-[#7E6A94] font-normal transition-all duration-700 ease-in-out flex items-center line-clamp-1 select-none ${
                         idx === placeholderIndex
                           ? 'opacity-100 transform translate-y-0'
-                          : 'opacity-0 transform -translate-y-3 pointer-events-none'
+                          : 'opacity-0 transform -translate-y-2.5 pointer-events-none'
                       }`}
                     >
                       {example}
@@ -116,7 +137,7 @@ export const Header: React.FC = () => {
                 </div>
               </div>
 
-              <span className="hidden md:inline-flex text-[0.65rem] font-bold text-[#604E72] bg-[#FAF4FC] border border-[#E8E2EE] px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+              <span className="hidden md:inline-flex text-[0.6rem] font-bold text-[#604E72] bg-[#FAF4FC] border border-[#E8E2EE] px-2 py-0.5 rounded-full uppercase tracking-wider">
                 Search
               </span>
             </button>
