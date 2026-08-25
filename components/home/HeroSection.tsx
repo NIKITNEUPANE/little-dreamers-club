@@ -72,8 +72,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
               sizes="100vw"
               className="object-cover object-[88%_center] sm:object-[center_center]"
             />
-            {/* Soft White Gradient at the back of text on the left */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/75 to-transparent w-[85%] sm:w-[60%] pointer-events-none" />
+            {/* Very gentle soft blend strictly on left 45% (Leaves baby completely untouched and crisp) */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/20 to-transparent w-[48%] sm:w-[42%] pointer-events-none" />
           </div>
 
           {/* Left Content Column */}
