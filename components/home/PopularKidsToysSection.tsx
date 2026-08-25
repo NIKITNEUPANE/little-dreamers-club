@@ -191,12 +191,12 @@ const ToyCard: React.FC<{ toy: ToyItem }> = ({ toy }) => {
 
   return (
     <div
-      className="group relative flex flex-col justify-between transition-all duration-300"
+      className="group relative flex flex-col bg-white rounded-2xl sm:rounded-3xl border border-[#EAE4F0] overflow-hidden shadow-2xs hover:shadow-dream transition-all duration-500 hover:-translate-y-1 justify-between"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Floating Hero Image Container */}
-      <div className="relative aspect-square w-full rounded-3xl overflow-hidden bg-[#FAF8F5] mb-3.5 border border-[#EAE4F0] shadow-xs group-hover:shadow-dream transition-all duration-500 group-hover:-translate-y-1">
+      {/* Top Image Container */}
+      <div className="relative aspect-square w-full overflow-hidden bg-[#FAF8F5]">
         <Link href={`/product/${toy.slug}`} className="block relative w-full h-full">
           {/* Primary Image */}
           <Image
@@ -225,13 +225,13 @@ const ToyCard: React.FC<{ toy: ToyItem }> = ({ toy }) => {
 
         {/* Corner Badge */}
         {toy.badge && (
-          <div className="absolute top-2.5 left-2.5 z-10 px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-md border border-white/80 text-[#604E72] text-[0.62rem] font-bold uppercase tracking-wider shadow-2xs pointer-events-none">
+          <div className="absolute top-3 left-3 z-10 px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-md border border-white/80 text-[#604E72] text-[0.62rem] font-bold uppercase tracking-wider shadow-2xs pointer-events-none">
             {toy.badge}
           </div>
         )}
 
         {/* Top Floating Glass Action Icons */}
-        <div className="absolute top-2.5 right-2.5 z-20 flex flex-col gap-1.5 opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <div className="absolute top-3 right-3 z-20 flex flex-col gap-1.5 opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -257,7 +257,7 @@ const ToyCard: React.FC<{ toy: ToyItem }> = ({ toy }) => {
           </Link>
         </div>
 
-        {/* Floating Quick Add Pill on Hover */}
+        {/* Desktop Quick Add Pill on Hover */}
         <div className="absolute inset-x-3 bottom-3 z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 hidden sm:block">
           <button
             onClick={handleQuickAdd}
@@ -282,51 +282,47 @@ const ToyCard: React.FC<{ toy: ToyItem }> = ({ toy }) => {
         </div>
       </div>
 
-      {/* Breathable Editorial Typography Directly Below */}
-      <div className="space-y-1 px-1">
-        <span className="text-[0.65rem] font-bold text-[#D4AF37] uppercase tracking-wider block">
-          {toy.ageRange}
-        </span>
+      {/* Card Content Body */}
+      <div className="p-3.5 sm:p-4.5 flex flex-col justify-between flex-1 space-y-2">
+        <div className="space-y-1">
+          <span className="text-[0.65rem] font-bold text-[#D4AF37] uppercase tracking-wider block">
+            {toy.ageRange}
+          </span>
 
-        <Link href={`/product/${toy.slug}`} className="group-hover:text-[#604E72] transition-colors block">
-          <h3 className="font-editorial text-xs sm:text-sm font-semibold text-[#2A2433] line-clamp-2 leading-snug">
-            {toy.name}
-          </h3>
-        </Link>
+          <Link href={`/product/${toy.slug}`} className="group-hover:text-[#604E72] transition-colors block">
+            <h3 className="font-editorial text-xs sm:text-sm font-semibold text-[#2A2433] line-clamp-1 leading-snug">
+              {toy.name}
+            </h3>
+          </Link>
+        </div>
 
-        <div className="pt-1 flex items-center justify-between">
-          <div className="flex items-baseline gap-2">
-            <span className="font-bold text-xs sm:text-sm text-[#4A3E56]">
-              {formatCurrency(toy.price)}
+        {/* Price Row (Rating removed completely) */}
+        <div className="pt-0.5 flex items-baseline gap-2">
+          <span className="font-bold text-xs sm:text-sm text-[#4A3E56]">
+            {formatCurrency(toy.price)}
+          </span>
+          {toy.compareAtPrice && (
+            <span className="text-[0.68rem] text-[#9F8EB9] line-through">
+              {formatCurrency(toy.compareAtPrice)}
             </span>
-            {toy.compareAtPrice && (
-              <span className="text-[0.68rem] text-[#9F8EB9] line-through">
-                {formatCurrency(toy.compareAtPrice)}
-              </span>
-            )}
-          </div>
-
-          <div className="flex items-center gap-1 text-[#D4AF37]">
-            <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />
-            <span className="text-[0.65rem] text-[#7E6A94] font-medium">
-              {toy.rating} ({toy.reviewsCount})
-            </span>
-          </div>
+          )}
         </div>
       </div>
 
       {/* Mobile Add to Bag Button */}
-      <button
-        onClick={handleQuickAdd}
-        className={`mt-2.5 w-full py-1.5 rounded-full text-[0.7rem] font-semibold sm:hidden flex items-center justify-center gap-1 transition-colors ${
-          isAdded
-            ? 'bg-emerald-600 text-white'
-            : 'bg-[#FAF4FC] text-[#604E72] border border-[#E8E2EE] active:bg-[#F3EEF8]'
-        }`}
-      >
-        <ShoppingBag className="w-3 h-3" />
-        <span>{isAdded ? 'Added' : 'Add to Bag'}</span>
-      </button>
+      <div className="px-3.5 pb-3.5 sm:hidden">
+        <button
+          onClick={handleQuickAdd}
+          className={`w-full py-1.5 rounded-full text-[0.7rem] font-semibold flex items-center justify-center gap-1 transition-colors ${
+            isAdded
+              ? 'bg-emerald-600 text-white'
+              : 'bg-[#FAF4FC] text-[#604E72] border border-[#E8E2EE] active:bg-[#F3EEF8]'
+          }`}
+        >
+          <ShoppingBag className="w-3 h-3" />
+          <span>{isAdded ? 'Added' : 'Add to Bag'}</span>
+        </button>
+      </div>
     </div>
   );
 };
@@ -359,8 +355,8 @@ export const PopularKidsToysSection: React.FC = () => {
           </Link>
         </div>
 
-        {/* 8-Card Toy Grid with Floating Canvas & Generous Row Spacing */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-8 sm:gap-y-12">
+        {/* 8-Card Toy Grid with Enclosed Luxury Box Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {TOYS_DATA.map((toy) => (
             <ToyCard key={toy.id} toy={toy} />
           ))}

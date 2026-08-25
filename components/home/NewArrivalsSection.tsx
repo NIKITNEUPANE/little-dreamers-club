@@ -40,8 +40,8 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({ products
           </Link>
         </div>
 
-        {/* 4-Column Floating Canvas Grid with Generous Vertical Row Gap */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-8 sm:gap-y-12">
+        {/* 4-Column Enclosed Card Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {displayProducts.map((product, idx) => (
             <ProductCard key={product.id} product={product} priority={idx === 0} />
           ))}

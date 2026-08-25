@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Heart, ShoppingBag, Check, Star, Eye } from 'lucide-react';
+import { Heart, ShoppingBag, Check, Eye } from 'lucide-react';
 import { Product } from '../../lib/db/types';
 import { useCart } from '../../lib/store/useCartStore';
 import { useWishlist } from '../../lib/store/useWishlistStore';
@@ -62,12 +62,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
 
   return (
     <div
-      className="group relative flex flex-col justify-between transition-all duration-300"
+      className="group relative flex flex-col bg-white rounded-2xl sm:rounded-3xl border border-[#EAE4F0] overflow-hidden shadow-2xs hover:shadow-dream transition-all duration-500 hover:-translate-y-1 justify-between"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Floating Photo Container (The Hero Element) */}
-      <div className="relative aspect-square w-full rounded-3xl overflow-hidden bg-[#FAF8F5] mb-3.5 border border-[#EAE4F0] shadow-xs group-hover:shadow-dream transition-all duration-500 group-hover:-translate-y-1">
+      {/* Top Image Container */}
+      <div className="relative aspect-square w-full overflow-hidden bg-[#FAF8F5]">
         <Link href={`/product/${product.slug}`} className="block relative w-full h-full">
           {/* Primary Image */}
           <Image
@@ -95,8 +95,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           )}
         </Link>
 
-        {/* Floating Frosted Pill Badge */}
-        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 z-10 pointer-events-none">
+        {/* Floating Pill Badge */}
+        <div className="absolute top-3 left-3 flex flex-col gap-1 z-10 pointer-events-none">
           {discountPercent > 0 ? (
             <span className="px-2.5 py-0.5 rounded-full bg-[#D4AF37] text-[#241B2E] text-[0.62rem] font-bold uppercase tracking-wider shadow-xs">
               Save {discountPercent}%
@@ -109,7 +109,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
         </div>
 
         {/* Floating Action Icons */}
-        <div className="absolute top-2.5 right-2.5 z-20 flex flex-col gap-1.5 opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <div className="absolute top-3 right-3 z-20 flex flex-col gap-1.5 opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <button
             onClick={handleWishlist}
             aria-label={isSaved ? 'Remove from wishlist' : 'Add to wishlist'}
@@ -131,7 +131,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           </Link>
         </div>
 
-        {/* Floating Quick Add Pill on Hover */}
+        {/* Desktop Quick Add Pill on Hover */}
         <div className="absolute inset-x-3 bottom-3 z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 hidden sm:block">
           <button
             onClick={handleQuickAdd}
@@ -157,51 +157,48 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
         </div>
       </div>
 
-      {/* Breathable Editorial Typography Directly Below */}
-      <div className="space-y-1 px-1">
-        <span className="text-[0.65rem] font-bold text-[#D4AF37] uppercase tracking-wider block">
-          {product.category_name || 'Heirloom Collection'}
-        </span>
+      {/* Card Content Body */}
+      <div className="p-3.5 sm:p-4.5 flex flex-col justify-between flex-1 space-y-2">
+        <div className="space-y-1">
+          <span className="text-[0.65rem] font-bold text-[#D4AF37] uppercase tracking-wider block">
+            {product.category_name || 'Heirloom Collection'}
+          </span>
 
-        <Link href={`/product/${product.slug}`} className="group-hover:text-[#604E72] transition-colors block">
-          <h3 className="font-editorial text-xs sm:text-sm font-semibold text-[#2A2433] line-clamp-2 leading-snug">
-            {product.name}
-          </h3>
-        </Link>
+          <Link href={`/product/${product.slug}`} className="group-hover:text-[#604E72] transition-colors block">
+            <h3 className="font-editorial text-xs sm:text-sm font-semibold text-[#2A2433] line-clamp-1 leading-snug">
+              {product.name}
+            </h3>
+          </Link>
+        </div>
 
-        <div className="pt-1 flex items-center justify-between">
-          <div className="flex items-baseline gap-2">
-            <span className="font-bold text-xs sm:text-sm text-[#4A3E56]">
-              {formatCurrency(product.base_price)}
+        {/* Price Row (Rating removed completely) */}
+        <div className="pt-0.5 flex items-baseline gap-2">
+          <span className="font-bold text-xs sm:text-sm text-[#4A3E56]">
+            {formatCurrency(product.base_price)}
+          </span>
+          {product.compare_at_price && (
+            <span className="text-[0.68rem] text-[#9F8EB9] line-through">
+              {formatCurrency(product.compare_at_price)}
             </span>
-            {product.compare_at_price && (
-              <span className="text-[0.68rem] text-[#9F8EB9] line-through">
-                {formatCurrency(product.compare_at_price)}
-              </span>
-            )}
-          </div>
-
-          <div className="flex items-center gap-1 text-[#D4AF37]">
-            <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />
-            <span className="text-[0.65rem] text-[#7E6A94] font-medium">
-              {product.rating} ({product.review_count})
-            </span>
-          </div>
+          )}
         </div>
       </div>
 
       {/* Mobile Add to Bag Button */}
-      <button
-        onClick={handleQuickAdd}
-        className={`mt-2.5 w-full py-1.5 rounded-full text-[0.7rem] font-semibold sm:hidden flex items-center justify-center gap-1 transition-colors ${
-          isAdded
-            ? 'bg-emerald-600 text-white'
-            : 'bg-[#FAF4FC] text-[#604E72] border border-[#E8E2EE] active:bg-[#F3EEF8]'
-        }`}
-      >
-        <ShoppingBag className="w-3 h-3" />
-        <span>{isAdded ? 'Added' : 'Add to Bag'}</span>
-      </button>
+      <div className="px-3.5 pb-3.5 sm:hidden">
+        <button
+          onClick={handleQuickAdd}
+          className={`w-full py-1.5 rounded-full text-[0.7rem] font-semibold flex items-center justify-center gap-1 transition-colors ${
+            isAdded
+              ? 'bg-emerald-600 text-white'
+              : 'bg-[#FAF4FC] text-[#604E72] border border-[#E8E2EE] active:bg-[#F3EEF8]'
+          }`}
+        >
+          <ShoppingBag className="w-3 h-3" />
+          <span>{isAdded ? 'Added' : 'Add to Bag'}</span>
+        </button>
+      </div>
     </div>
   );
 };
+

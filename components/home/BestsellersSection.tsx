@@ -42,8 +42,8 @@ export const BestsellersSection: React.FC<BestsellersSectionProps> = ({ products
           </Link>
         </div>
 
-        {/* Product Cards Grid with Floating Canvas Size & Generous Row Spacing */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-8 sm:gap-y-12">
+        {/* Product Cards Grid with Enclosed Luxury Box Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {bestsellers.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
