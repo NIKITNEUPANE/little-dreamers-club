@@ -17,6 +17,10 @@ export const MobileFloatingDock: React.FC = () => {
     setMounted(true);
   }, []);
 
+  if (!mounted) {
+    return null;
+  }
+
   if (pathname.startsWith('/checkout') || pathname.startsWith('/admin')) {
     return null;
   }
