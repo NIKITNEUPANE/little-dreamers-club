@@ -48,7 +48,7 @@ const CATEGORY_QUICK_LINKS = [
 export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
   const data = {
     badge: content?.badge || 'New Collection',
-    headline: content?.headline || 'Where Little\nThings Become\nBig Dreams',
+    headline: content?.headline || 'Little Things\nBig Dreams',
     subheadline:
       content?.subheadline ||
       'Clothes and toys for every little adventure.',
@@ -66,21 +66,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content }) => {
           <div className="absolute inset-0">
             <Image
               src={data.image_url}
-              alt="Where Little Things Become Big Dreams"
+              alt="Little Things Big Dreams"
               fill
               priority
               loading="eager"
               sizes="100vw"
               className="object-cover object-[94%_center] sm:object-[center_center]"
             />
-            {/* Reduced soft white gradient wash strictly under left text */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5]/80 via-[#FAF8F5]/30 to-transparent w-[40%] sm:w-[32%] pointer-events-none" />
+            {/* Soft, visible warm-white gradient wash giving text high-contrast editorial backing */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/55 to-transparent w-[48%] sm:w-[38%] pointer-events-none" />
           </div>
 
           {/* Left Content Column (Open, comfortable line spacing) */}
           <div className="relative z-10 w-full p-5 sm:p-10 lg:p-14 max-w-[215px] sm:max-w-md lg:max-w-lg flex flex-col justify-center">
-            {/* Main Headline with generous line-height */}
-            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium text-[#261D32] tracking-tight leading-[1.22] sm:leading-[1.18] mb-3.5 sm:mb-4.5">
+            {/* Main Headline with luxury editorial serif font */}
+            <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-medium text-[#241A30] tracking-tight leading-[1.16] mb-3.5 sm:mb-4.5">
               {data.headline.split('\n').map((line, idx) => (
                 <span key={idx} className="block">
                   {line}
