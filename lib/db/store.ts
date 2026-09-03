@@ -20,6 +20,92 @@ import {
 } from './seed-data';
 import { supabase, isSupabaseConfigured } from '../supabase/client';
 
+function mapSupabaseProduct(item: any): Product {
+  const mediaList = Array.isArray(item.media) ? item.media : [];
+  const images =
+    mediaList.length > 0
+      ? mediaList.map((m: any, i: number) => ({
+          id: m.id || `img-${item.id}-${i}`,
+          product_id: item.id,
+          variant_id: m.color_key,
+          image_url: m.url,
+          alt_text: m.title || item.title || item.name || '',
+          sort_order: i,
+          is_primary: Boolean(m.is_primary ?? i === 0),
+        }))
+      : [
+          {
+            id: `img-${item.id}-0`,
+            product_id: item.id,
+            image_url:
+              (Array.isArray(item.images) && item.images[0]) ||
+              'https://images.unsplash.com/photo-1522771930-78848d9293e8?w=800&auto=format&fit=crop&q=80',
+            alt_text: item.title || item.name || '',
+            sort_order: 0,
+            is_primary: true,
+          },
+        ];
+
+  const variants =
+    item.product_variants && item.product_variants.length > 0
+      ? item.product_variants.map((v: any) => ({
+          id: v.id,
+          product_id: item.id,
+          sku: v.sku || `${item.sku || 'SKU'}-VAR`,
+          size:
+            v.option_combination?.Size ||
+            v.option_combination?.size ||
+            v.size ||
+            'Standard',
+          color:
+            v.option_combination?.Color ||
+            v.option_combination?.color ||
+            v.color ||
+            'Default',
+          color_hex: v.color_hex || '#183B70',
+          price: Number(v.price ?? item.base_price ?? 0),
+          stock_quantity: Number(v.inventory_quantity ?? v.stock_quantity ?? 10),
+          low_stock_threshold: 5,
+        }))
+      : [
+          {
+            id: `var-${item.id}-default`,
+            product_id: item.id,
+            sku: item.sku || 'SKU-DEFAULT',
+            size: 'Standard',
+            color: 'Default',
+            color_hex: '#183B70',
+            price: Number(item.base_price || 0),
+            stock_quantity: Number(item.inventory_quantity ?? 10),
+            low_stock_threshold: 5,
+          },
+        ];
+
+  return {
+    id: item.id,
+    name: item.title || item.name || 'Untitled Product',
+    slug: item.slug,
+    description: item.description || '',
+    short_description: item.short_description || '',
+    sku: item.sku || 'SKU',
+    base_price: Number(item.base_price || 0),
+    compare_at_price: item.compare_price
+      ? Number(item.compare_price)
+      : item.compare_at_price
+      ? Number(item.compare_at_price)
+      : undefined,
+    category_id: item.category_id || '',
+    status: item.status || 'active',
+    featured: Boolean(item.featured),
+    rating: Number(item.rating || 5.0),
+    review_count: Number(item.review_count || 0),
+    created_at: item.created_at || new Date().toISOString(),
+    updated_at: item.updated_at || new Date().toISOString(),
+    images,
+    variants,
+  };
+}
+
 // Global In-Memory and Local Storage store for demo/hybrid mode
 class LocalDataStore {
   private products: Product[] = [...INITIAL_PRODUCTS];
@@ -80,11 +166,22 @@ class LocalDataStore {
     if (isSupabaseConfigured && supabase) {
       try {
         // Direct Supabase query
-        let query = supabase.from('products').select('*, product_variants(*), product_images(*)');
+        let query = supabase.from('products').select('*, product_variants(*)');
         if (params?.featured) query = query.eq('featured', true);
         const { data, error } = await query;
         if (!error && data && data.length > 0) {
-          return data as any;
+          let mapped = data.map(mapSupabaseProduct).filter((p) => p.status === 'active');
+          if (params?.categorySlug) {
+            const cat = this.categories.find((c) => c.slug === params.categorySlug);
+            if (cat) mapped = mapped.filter((p) => p.category_id === cat.id);
+          }
+          if (params?.minPrice !== undefined) {
+            mapped = mapped.filter((p) => p.base_price >= params.minPrice!);
+          }
+          if (params?.maxPrice !== undefined) {
+            mapped = mapped.filter((p) => p.base_price <= params.maxPrice!);
+          }
+          return mapped;
         }
       } catch (e) {
         console.warn('Supabase fetch failed, fallback to local store:', e);
@@ -163,11 +260,39 @@ class LocalDataStore {
   }
 
   async getProductBySlug(slug: string): Promise<Product | null> {
+    if (isSupabaseConfigured && supabase) {
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .select('*, product_variants(*)')
+          .eq('slug', slug)
+          .maybeSingle();
+        if (!error && data) {
+          return mapSupabaseProduct(data);
+        }
+      } catch (e) {
+        console.warn('Supabase getProductBySlug failed, fallback to local:', e);
+      }
+    }
     const product = this.products.find((p) => p.slug === slug);
     return product || null;
   }
 
   async getProductById(id: string): Promise<Product | null> {
+    if (isSupabaseConfigured && supabase) {
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .select('*, product_variants(*)')
+          .eq('id', id)
+          .maybeSingle();
+        if (!error && data) {
+          return mapSupabaseProduct(data);
+        }
+      } catch (e) {
+        console.warn('Supabase getProductById failed, fallback to local:', e);
+      }
+    }
     const product = this.products.find((p) => p.id === id);
     return product || null;
   }
